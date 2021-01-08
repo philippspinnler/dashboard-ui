@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    background-color: black;
+    font-size: 300%; 
+}
+
+#app {
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    background-position: center;
+    
+}
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: [col-1] 10% [col-2] 10% [col-3] 10% [col-4] 10% [col-5] 10% [col-6] 10% [col-7] 10% [col-8] 10% [col-9] 10% [col-10] 10%;
+    grid-template-rows: [row-1] 5% [row-2] 5% [row-3] 5% [row-4] 5% [row-5] 5% [row-6] 5% [row-7] 5% [row-8] 5% [row-9] 5% [row-10] 5% [row-11] 5% [row-12] 5% [row-13] 5% [row-14] 5% [row-15] 5% [row-16] 5% [row-17] 5% [row-18] 5% [row-19] 5% [row-20] 5%;
+}
+
+.widget {
+    /* background-color: rgb(255, 255, 255, 0.3); */
+    padding: 50px;
+    overflow: hidden;
+}
+
+.widget .title {
+    text-transform: uppercase;
+    color: rgb(255, 255, 255, 0.4);
+}
+
+.widget .subtitle {
+    text-transform: uppercase;
+    color: rgb(255, 255, 255, 0.7);
+}
+
+/****************/
+/*** CALENDAR ***/
+/****************/
+.widget-calendar {
+    grid-column-start: col-1;
+    grid-column-end: span col-6;
+    grid-row-start: row-3;
+    grid-row-end: row-19;
+}
+
+.widget-calendar span.small-date {
+    font-size: 50%;
+    float: right;
+}
+
+.widget-calendar .event {
+    margin-bottom: 50px;
+    background-color: rgb(255, 255, 255, 0.2);
+    padding: 50px;
+}
+
+.widget-calendar .event:last-child {
+    margin-bottom: 100px;
+}
+
+.widget-calendar .date-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.widget-calendar .date-container .date {
+    margin-bottom: 10px;
+}
+
+/****************/
+/**** CLOCK *****/
+/****************/
+.widget-clock {
+    grid-column-start: col-1;
+    grid-column-end: span col-6;
+    grid-row-start: row-1;
+    grid-row-end: row-3;
+}
+
+.widget-clock .clock-container {
+    display: flex;
+}
+
+.widget-clock .time {
+    font-size: 400%;
+}
+
+.widget-clock .seconds {
+    margin-top: 30px;
+    font-size: 150%;
+    margin-left: 10px;
+}
+
+.widget-clock .date-container {
+    font-size: 120%;
+}
+
+/****************/
+/**** SONOS *****/
+/****************/
+.widget-sonos {
+    grid-column-start: col-6;
+    grid-column-end: span grid-column-end;
+    grid-row-start: row-1;
+    grid-row-end: row-3;
+
+    text-align: right;
+}
+
+.widget-sonos .sonos-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.widget-sonos .sonos-container .artwork > img {
+    height: 160px;
+    width: 160px;
+}
+
+.widget-sonos .sonos-container .artwork {
+    margin-left: 50px;
+}
+
+/****************/
+/*** NETATMO ****/
+/****************/
+.widget-netatmo {
+    grid-column-start: col-6;
+    grid-column-end: span grid-column-end;
+    grid-row-start: row-3;
+    grid-row-end: row-7;
+
+    text-align: right;
+}
+
+/******************************/
+/*** PUBLIC-TRANSPORTATION ****/
+/******************************/
+.widget-public-transportation {
+    grid-column-start: col-6;
+    grid-column-end: span grid-column-end;
+    grid-row-start: row-7;
+    grid-row-end: row-10;
+
+    text-align: right;
+}
+
+/*************************/
+/*** ESSENTAIL-PHOTOS ****/
+/*************************/
+.widget-essential-photos {
+    grid-column-start: col-6;
+    grid-column-end: span grid-column-end;
+    grid-row-start: row-10;
+    grid-row-end: row-12;
+
+    text-align: right;
+}
+
+/*****************/
+/*** Withings ****/
+/*****************/
+.widget-withings {
+    grid-column-start: col-6;
+    grid-column-end: span grid-column-end;
+    grid-row-start: row-12;
+    grid-row-end: row-15;
+
+    text-align: right;
+}
+
+/*****************/
+/*** EO-Guide ****/
+/*****************/
+.widget-eo-guide {
+    grid-column-start: col-6;
+    grid-column-end: span grid-column-end;
+    grid-row-start: row-15;
+    grid-row-end: row-19;
+
+    text-align: right;
+}
+
+/****************/
+/*** Weather ****/
+/****************/
+.widget-weather {
+    grid-column-start: col-1;
+    grid-column-end: span grid-column-end;
+    grid-row-start: row-19;
+    grid-row-end: span grid-row-end;
+
+    text-align: center;
+}
+
+.widget-weather .weather-container {
+    display: flex;
+    justify-content: space-evenly; /* center */
+    align-items: stretch;
+}
+
+.widget-weather .current-container h1 {
+    font-size: 400%;
+}
