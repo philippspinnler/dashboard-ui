@@ -17,15 +17,15 @@ dayjs.updateLocale('de-ch', {
         future: "in %s",
         past: "vor %s",
         s: 'ein paar Sekunden',
-        m: "eine Minute",
+        m: "einer Minute",
         mm: "%d Minuten",
-        h: "eine Stunde",
+        h: "einer Stunde",
         hh: "%d Stunden",
-        d: "ein Tag",
+        d: "einem Tag",
         dd: "%d Tage",
-        M: "ein Monat",
+        M: "einem Monat",
         MM: "%d Monate",
-        y: "ein Jahr",
+        y: "einem Jahr",
         yy: "%d Jahre"
     }
 });
@@ -35,6 +35,8 @@ axios.interceptors.request.use(function (config) {
 
     return config;
 });
+
+const baseUrl = 'http://localhost:3000';
 
 Vue.component('widget-clock', {
     data() {
@@ -65,12 +67,12 @@ Vue.component('widget-calendar', {
     },
     mounted() {
         setInterval(async () => {
-            const response = await axios.get('http://localhost:3000/ical');
+            const response = await axios.get(`${baseUrl}/ical`);
         
             const groupped = []
             for (let group of response.data.groupped) {
                 group.dateDay = dayjs(group.date).calendar();
-                group.date = dayjs(group.date).format('D. MMMM YYYY');
+                group.date = dayjs(group.date).format('D. MMMM');
                 group.events = group.events.map(event => {
                     event.startTime = event.allDay ? 'ganzer Tag' : dayjs(event.start).format("HH:mm");
                     return event;
@@ -95,7 +97,7 @@ Vue.component('widget-sonos', {
     },
     mounted() {
         setInterval(async () => {
-            const response = await axios.get('http://localhost:3000/sonos');
+            const response = await axios.get(`${baseUrl}/sonos`);
                 
             if (response.status == 204) {
                 this.currentlyPlaying = false;
@@ -121,7 +123,7 @@ Vue.component('widget-netatmo', {
     },
     mounted() {
         setInterval(async () => {
-            const response = await axios.get('http://localhost:3000/netatmo');
+            const response = await axios.get(`${baseUrl}/netatmo`);
             this.inside = response.data.temperature;
             this.co2 = response.data.co2;
             this.outside = response.data.modules[0].temperature;
@@ -141,7 +143,7 @@ Vue.component('widget-public-transportation', {
     },
     mounted() {
         setInterval(async () => {
-            const response = await axios.get('http://localhost:3000/public-transportation?connections=[["Hoelstein-Weidbaechli", "Liestal"], ["Liestal", "ZuerichHB"]]');
+            const response = await axios.get(`${baseUrl}/public-transportation?connections=[["Hoelstein-Weidbaechli", "Liestal"], ["Liestal", "ZuerichHB"]]`);
             this.hoelstein = dayjs(response.data.connections[0].departure).format('HH:mm');
             this.hoelsteinInMinutes = dayjs().to(response.data.connections[0].departure);
             this.liestal = dayjs(response.data.connections[1].departure).format('HH:mm');
@@ -160,7 +162,7 @@ Vue.component('widget-essential-photos', {
     },
     mounted() {
         setInterval(async () => {
-            const response = await axios.get('http://localhost:3000/essential-photos');
+            const response = await axios.get(`${baseUrl}/essential-photos`);
             this.facebook = response.data.facebook;
             this.instagram = response.data.instagram;
         }, 5000);
@@ -177,7 +179,7 @@ Vue.component('widget-withings', {
     },
     mounted() {
         setInterval(async () => {
-            const response = await axios.get('http://localhost:3000/withings');
+            const response = await axios.get(`${baseUrl}/withings`);
             this.mona = response.data.Mona.deltaSinceLastMeasure;
             this.philipp = response.data.Philipp.deltaSinceLastMeasure;
         }, 5000);
@@ -196,7 +198,7 @@ Vue.component('widget-eo-guide', {
     },
     mounted() {
         setInterval(async () => {
-            const response = await axios.get('http://localhost:3000/eo-guide');
+            const response = await axios.get(`${baseUrl}/eo-guide`);
             this.total = response.data.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'");
             this.review = response.data.latestReview.reviewFormatted;
             this.stars = response.data.latestReview.stars;
@@ -222,7 +224,7 @@ Vue.component('widget-weather', {
     },
     mounted() {
         setInterval(async () => {
-            const response = await axios.get('http://localhost:3000/weather');
+            const response = await axios.get(`${baseUrl}/weather`);
             const icons = {
                 "01d": "fa fa-sun",
                 "02d": "fa fa-cloud-sun",
@@ -279,7 +281,7 @@ new Vue({
     async mounted() {
 
         const getImages = async () => {
-            const response = await axios.get('http://localhost:3000/icloud-album')
+            const response = await axios.get(`${baseUrl}/icloud-album`)
             this.image = response.data.images[Math.floor(Math.random() * response.data.images.length)]
         }
 
