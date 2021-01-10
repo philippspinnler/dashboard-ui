@@ -137,20 +137,16 @@ Vue.component('widget-public-transportation', {
         return {
             hoelstein: '',
             hoelsteinInMinutes: '',
-            liestal: '',
-            liestalInMinutes: ''
         }
     },
     mounted() {
         setInterval(async () => {
-            const response = await axios.get(`${baseUrl}/public-transportation?connections=[["Hoelstein-Weidbaechli", "Liestal"], ["Liestal", "ZuerichHB"]]`);
+            const response = await axios.get(`${baseUrl}/public-transportation?connections=[["Hoelstein-Weidbaechli", "Liestal"]]`);
             this.hoelstein = dayjs(response.data.connections[0].departure).format('HH:mm');
             this.hoelsteinInMinutes = dayjs().to(response.data.connections[0].departure);
-            this.liestal = dayjs(response.data.connections[1].departure).format('HH:mm');
-            this.liestalInMinutes = dayjs().to(response.data.connections[1].departure);
         }, 5000);
     },
-    template: '<div><h1 class="title">ÖV</h1><p class="subtitle">WB nach Liestal</p><h2><small style="font-size: 50%; margin-right: 50px;">{{hoelstein}} Uhr</small>{{hoelsteinInMinutes}}</h2><p class="subtitle">Zug nach Zürich</p><h2><small style="font-size: 50%; margin-right: 50px;">{{liestal}} Uhr</small>{{liestalInMinutes}}</h2></div>'
+    template: '<div><h1 class="title">ÖV</h1><p class="subtitle">WB nach Liestal</p><h2><small style="font-size: 50%; margin-right: 50px;">{{hoelstein}} Uhr</small>{{hoelsteinInMinutes}}</h2></div>'
 });
 
 Vue.component('widget-essential-photos', {
@@ -167,7 +163,7 @@ Vue.component('widget-essential-photos', {
             this.instagram = response.data.instagram;
         }, 5000);
     },
-    template: '<div><h1 class="title">Essentail-Photos</h1><h2>{{facebook}} <i class="fab fa-facebook-square"></i></h2><h2>{{instagram}} <i class="fab fa-instagram-square"></i></h2></div>'
+    template: '<div><h1 class="title">Essentail-Photos</h1><h2>{{facebook}} <i class="fab fa-facebook-square"></i> {{instagram}} <i class="fab fa-instagram-square"></i></h2></div>'
 });
 
 Vue.component('widget-withings', {
@@ -185,6 +181,27 @@ Vue.component('widget-withings', {
         }, 5000);
     },
     template: '<div><h1 class="title">Withings</h1><p class="subtitle">Mona</p><h2>{{mona}} kg</h2><p class="subtitle">Philipp</p><h2>{{philipp}} kg</h2></div>'
+});
+
+Vue.component('widget-internet', {
+    data() {
+        return {
+            download: '',
+            upload: '',
+            speedtestDownload: '',
+            speedtestUpload: '',
+        }
+    },
+    mounted() {
+        setInterval(async () => {
+            const response = await axios.get(`http://10.0.86.11:3000/api/overall`);
+            this.download = response.data.donwloadUsagePretty;
+            this.upload = response.data.uploadUsagePretty;
+            this.speedtestDownload = response.data.speedTestResult.downloadSpeedPretty;
+            this.speedtestUpload = response.data.speedTestResult.uploadSpeedPretty;
+        }, 5000);
+    },
+    template: '<div><h1 class="title">Internet</h1><p class="subtitle">Traffic</p><h2>{{download}} <i class="fas fa-chevron-down"></i> {{upload}} <i class="fas fa-chevron-up"></i></h2><p class="subtitle">Speedtest</p><h2>{{speedtestDownload}} <i class="fas fa-chevron-down"></i> {{speedtestUpload}} <i class="fas fa-chevron-up"></i></h2></div>'
 });
 
 Vue.component('widget-eo-guide', {

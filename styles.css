@@ -9,7 +9,7 @@ body {
     font-family: 'Roboto', sans-serif;
     color: white;
     background-color: black;
-    font-size: 300%; 
+    font-size: 290%; 
 }
 
 #app {
@@ -28,11 +28,54 @@ body {
     -o-box-sizing:      border-box;
     box-sizing:         border-box;
 
+
+    display: flex;
+
     height: 100vh;
     width: 100vw;
-    display: grid;
-    grid-template-columns: [col-1] 10% [col-2] 10% [col-3] 10% [col-4] 10% [col-5] 10% [col-6] 10% [col-7] 10% [col-8] 10% [col-9] 10% [col-10] 10%;
-    grid-template-rows: [row-1] 5% [row-2] 5% [row-3] 5% [row-4] 5% [row-5] 5% [row-6] 5% [row-7] 5% [row-8] 5% [row-9] 5% [row-10] 5% [row-11] 5% [row-12] 5% [row-13] 5% [row-14] 5% [row-15] 5% [row-16] 5% [row-17] 5% [row-18] 5% [row-19] 5% [row-20] 5%;
+
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.container-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    flex-basis: 10%;
+}
+
+.container-top-left {
+
+}
+
+.container-top-right {
+
+}
+
+.container-content {
+    display: flex;
+
+    justify-content: space-between;
+
+    flex-grow: 1;
+}
+
+.container-content-left {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 50%;
+}
+
+.container-content-right {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 50%;
+}
+
+.container-bottom {
+    flex-basis: 10%;
 }
 
 .widget {
@@ -55,10 +98,6 @@ body {
 /*** CALENDAR ***/
 /****************/
 .widget-calendar {
-    grid-column-start: col-1;
-    grid-column-end: span col-6;
-    grid-row-start: row-3;
-    grid-row-end: row-19;
 }
 
 .widget-calendar span.small-date {
@@ -90,14 +129,11 @@ body {
 /**** CLOCK *****/
 /****************/
 .widget-clock {
-    grid-column-start: col-1;
-    grid-column-end: span col-6;
-    grid-row-start: row-1;
-    grid-row-end: row-3;
 }
 
 .widget-clock .clock-container {
     display: flex;
+    margin-bottom: -30px;
 }
 
 .widget-clock .time {
@@ -118,11 +154,6 @@ body {
 /**** SONOS *****/
 /****************/
 .widget-sonos {
-    grid-column-start: col-6;
-    grid-column-end: span grid-column-end;
-    grid-row-start: row-1;
-    grid-row-end: row-3;
-
     text-align: right;
 }
 
@@ -144,11 +175,6 @@ body {
 /*** NETATMO ****/
 /****************/
 .widget-netatmo {
-    grid-column-start: col-6;
-    grid-column-end: span grid-column-end;
-    grid-row-start: row-3;
-    grid-row-end: row-7;
-
     text-align: right;
 }
 
@@ -156,11 +182,6 @@ body {
 /*** PUBLIC-TRANSPORTATION ****/
 /******************************/
 .widget-public-transportation {
-    grid-column-start: col-6;
-    grid-column-end: span grid-column-end;
-    grid-row-start: row-7;
-    grid-row-end: row-10;
-
     text-align: right;
 }
 
@@ -168,11 +189,6 @@ body {
 /*** ESSENTAIL-PHOTOS ****/
 /*************************/
 .widget-essential-photos {
-    grid-column-start: col-6;
-    grid-column-end: span grid-column-end;
-    grid-row-start: row-10;
-    grid-row-end: row-12;
-
     text-align: right;
 }
 
@@ -180,11 +196,6 @@ body {
 /*** Withings ****/
 /*****************/
 .widget-withings {
-    grid-column-start: col-6;
-    grid-column-end: span grid-column-end;
-    grid-row-start: row-12;
-    grid-row-end: row-15;
-
     text-align: right;
 }
 
@@ -192,11 +203,13 @@ body {
 /*** EO-Guide ****/
 /*****************/
 .widget-eo-guide {
-    grid-column-start: col-6;
-    grid-column-end: span grid-column-end;
-    grid-row-start: row-15;
-    grid-row-end: row-19;
+    text-align: right;
+}
 
+/*****************/
+/*** INTERNET ****/
+/*****************/
+.widget-internet {
     text-align: right;
 }
 
@@ -204,18 +217,12 @@ body {
 /*** Weather ****/
 /****************/
 .widget-weather {
-    grid-column-start: col-1;
-    grid-column-end: span grid-column-end;
-    grid-row-start: row-19;
-    grid-row-end: span grid-row-end;
-
-    text-align: center;
+    
 }
 
 .widget-weather .weather-container {
     display: flex;
-    justify-content: space-evenly; /* center */
-    align-items: stretch;
+    justify-content: space-between;
 }
 
 .widget-weather .current-container h1 {
