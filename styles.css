@@ -35,7 +35,7 @@ body {
     width: 100vw;
 
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .container-top {
