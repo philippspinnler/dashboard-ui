@@ -74,7 +74,15 @@ Vue.component('widget-calendar', {
                 group.dateDay = dayjs(group.date).calendar();
                 group.date = dayjs(group.date).format('D. MMMM');
                 group.events = group.events.map(event => {
-                    event.startTime = event.allDay ? 'ganzer Tag' : dayjs(event.start).format("HH:mm");
+                    event.startTime = event.allDay ? 'Den ganzen Tag' : dayjs(event.start).format("HH:mm");
+                    if (event.summary.startsWith('Geburtstag ') && event.allDay) {
+                        const name = event.summary.split(' ')[1];
+                        const age = event.summary.split(' ')[2] ? dayjs().startOf('day').diff(dayjs(new Date(event.summary.split(' ')[2])), 'year') : null;
+                        event.birthday = {
+                            name,
+                            age
+                        }
+                    }
                     return event;
                 })
                 groupped.push(group);
@@ -83,7 +91,7 @@ Vue.component('widget-calendar', {
         }, 5000);
         
     },
-    template: `<div><div v-for="group in groupped"><div class="date-container"><div class="day"><h1 class="title">{{group.dateDay}}</h1></div><div class="date subtitle">{{group.date}}</div></div><div class="event" v-for="event in group.events" v-bind:style="{ borderLeft: 'solid #'+event.color+' 10px' }"><h2>{{event.startTime}}</h2>{{event.summary}}</div></div></div>`
+    template: `<div><div v-for="group in groupped"><div class="date-container"><div class="day"><h1 class="title">{{group.dateDay}}</h1></div><div class="date subtitle">{{group.date}}</div></div><div class="event-container" v-for="event in group.events"><div class="event-birthday" v-if="event.birthday"><div><h2><i class="fa fa-gift" /> {{event.birthday.name}}</h2></div><div>{{event.birthday.age}}</div></div><div class="event" v-if="!event.birthday" v-bind:style="{ borderLeft: 'solid #'+event.color+' 10px' }"><div v-if="event.allDay" class="event-all-day"><span>{{event.startTime}}</span></div><h2 v-if="!event.allDay">{{event.startTime}}</h2>{{event.summary}}</div></div></div></div>`
 });
 
 Vue.component('widget-sonos', {

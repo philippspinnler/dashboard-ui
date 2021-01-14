@@ -105,14 +105,25 @@ body {
     float: right;
 }
 
-.widget-calendar .event {
+.widget-calendar .event-container {
     margin-bottom: 50px;
+}
+
+.widget-calendar .event-container:last-child {
+    margin-bottom: 100px;
+}
+
+.widget-calendar .event {
     background-color: rgb(255, 255, 255, 0.2);
     padding: 50px;
 }
 
-.widget-calendar .event:last-child {
-    margin-bottom: 100px;
+.widget-calendar .event-birthday {
+    background-color: rgb(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    align-items: center;
 }
 
 .widget-calendar .date-container {
@@ -123,6 +134,17 @@ body {
 
 .widget-calendar .date-container .date {
     margin-bottom: 10px;
+}
+
+.widget-calendar .event-all-day {
+    margin-bottom: 20px;
+}
+
+.widget-calendar .event-all-day span {
+    background-color: rgb(255, 255, 255, 0.7);
+    padding: 10px;
+    border-radius: 15px;
+    color: rgb(50, 50, 50);
 }
 
 /****************/
