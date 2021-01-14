@@ -36,7 +36,8 @@ axios.interceptors.request.use(function (config) {
     return config;
 });
 
-const baseUrl = 'http://localhost:3000';
+// const baseUrl = 'http://localhost:3000';
+const baseUrl = 'http://10.0.86.177:3000';
 
 Vue.component('widget-clock', {
     data() {
@@ -76,8 +77,22 @@ Vue.component('widget-calendar', {
                 group.events = group.events.map(event => {
                     event.startTime = event.allDay ? 'Den ganzen Tag' : dayjs(event.start).format("HH:mm");
                     if (event.summary.startsWith('Geburtstag ') && event.allDay) {
-                        const name = event.summary.split(' ')[1];
-                        const age = event.summary.split(' ')[2] ? dayjs().startOf('day').diff(dayjs(new Date(event.summary.split(' ')[2])), 'year') : null;
+                        const birthYearMatch = / (\d{4})/gm.exec(event.summary);
+                        let age = null;
+                        if (birthYearMatch) {
+                            const birthYear = birthYearMatch[1];
+                            age = dayjs().startOf('day').diff(dayjs(new Date(birthYear)), 'year');
+                        }
+
+
+                        let name;
+                        
+                        if (birthYearMatch) {
+                            name = event.summary.split(' ').slice(1, event.summary.split(' ').length-1).join(' ');
+                        } else {
+                            name = event.summary.split(' ').slice(1).join(' ');
+                        }
+
                         event.birthday = {
                             name,
                             age
