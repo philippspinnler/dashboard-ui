@@ -60,6 +60,7 @@ body {
     justify-content: space-between;
 
     flex-grow: 1;
+    overflow: hidden;
 }
 
 .container-content-left {

@@ -36,8 +36,8 @@ axios.interceptors.request.use(function (config) {
     return config;
 });
 
-// const baseUrl = 'http://localhost:3000';
-const baseUrl = 'http://10.0.86.177:3000';
+const baseUrl = 'http://localhost:3000';
+// const baseUrl = 'http://10.0.86.177:3000';
 
 Vue.component('widget-clock', {
     data() {
