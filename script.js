@@ -36,8 +36,9 @@ axios.interceptors.request.use(function (config) {
     return config;
 });
 
+
 const baseUrl = 'http://localhost:3000';
-// const baseUrl = 'http://10.0.86.177:3000';
+//const baseUrl = 'http://10.0.86.177:3000';
 
 Vue.component('widget-clock', {
     data() {
@@ -304,7 +305,7 @@ Vue.component('widget-weather', {
                     })[0]
                 }
             });
-            this.daily = this.daily.slice(1, 5)
+            this.daily = this.daily.slice(1, 7)
         }, 5000);
     },
     template: '<div class="weather-container"><div class="current-container"><h1><i v-bind:class="current.weather.faIcon"></i></h1><h2>{{current.temperature}} °C</h2></div><div class="daily-container" v-for="day in daily"><h2>{{day.dateDay}}</h2><h2><i v-bind:class="day.weather.faIcon"></i></h2><h3>{{day.temperature.max}} °C</h3><h3>{{day.temperature.min}} °C</h3></div></div>'

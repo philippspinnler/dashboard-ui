@@ -9,7 +9,7 @@ body {
     font-family: 'Roboto', sans-serif;
     color: white;
     background-color: black;
-    font-size: 290%; 
+    font-size: 150%; 
 }
 
 #app {
@@ -21,7 +21,7 @@ body {
 }
 
 .container {
-    padding: 50px;
+    padding: 10px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing:    border-box;
     -ms-box-sizing:     border-box;
@@ -81,16 +81,18 @@ body {
 
 .widget {
     /* background-color: rgb(255, 255, 255, 0.3); */
-    padding: 50px;
+    padding: 20px;
     overflow: hidden;
 }
 
 .widget .title {
+    font-size: 120%;
     text-transform: uppercase;
     color: rgb(255, 255, 255, 0.4);
 }
 
 .widget .subtitle {
+    font-size: 80%;
     text-transform: uppercase;
     color: rgb(255, 255, 255, 0.7);
 }
@@ -107,16 +109,17 @@ body {
 }
 
 .widget-calendar .event-container {
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+    margin-right: 200px;
 }
 
 .widget-calendar .event-container:last-child {
-    margin-bottom: 100px;
+    margin-bottom: 20px;
 }
 
 .widget-calendar .event {
     background-color: rgb(255, 255, 255, 0.2);
-    padding: 50px;
+    padding: 10px;
 }
 
 .widget-calendar .event-birthday {
@@ -131,6 +134,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    margin-right: 200px;
 }
 
 .widget-calendar .date-container .date {
@@ -138,7 +142,7 @@ body {
 }
 
 .widget-calendar .event-all-day {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .widget-calendar .event-all-day span {
@@ -164,12 +168,13 @@ body {
 }
 
 .widget-clock .seconds {
-    margin-top: 30px;
+    margin-top: 15px;
     font-size: 150%;
     margin-left: 10px;
 }
 
 .widget-clock .date-container {
+    margin-top: 15px;
     font-size: 120%;
 }
 
