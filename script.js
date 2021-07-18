@@ -153,7 +153,7 @@ Vue.component('widget-netatmo', {
             this.outside = response.data.modules[0].temperature;
         }, 5000);
     },
-    template: '<div><h1 class="title">Netatmo</h1><p class="subtitle">Innen</p><h2>{{inside}} °C</h2><p class="subtitle">Aussen</p><h2>{{outside}} °C</h2><p class="subtitle">CO2</p><h2>{{co2}} ppm</h2></div>'
+    template: '<div><h1 class="title">Netatmo</h1><p class="subtitle">Innen</p><h2>{{inside}} °C</h2><!--<p class="subtitle">Aussen</p><h2>{{outside}} °C</h2>--><p class="subtitle">CO2</p><h2>{{co2}} ppm</h2></div>'
 });
 
 Vue.component('widget-public-transportation', {
@@ -161,16 +161,21 @@ Vue.component('widget-public-transportation', {
         return {
             hoelstein: '',
             hoelsteinInMinutes: '',
+            oberdorf: '',
+            oberdorfInMinutes: '',
         }
     },
     mounted() {
         setInterval(async () => {
-            const response = await axios.get(`${baseUrl}/public-transportation?connections=[["Hoelstein-Weidbaechli", "Liestal"]]`);
+            const response = await axios.get(`${baseUrl}/public-transportation?connections=[["Bennwil-Dorf", "Hoelstein-Bahnhof", "direct"], ["Bennwil-Dorf", "Oberdorf-BL-Bahnhof", "direct"]]`);
             this.hoelstein = dayjs(response.data.connections[0].departure).format('HH:mm');
             this.hoelsteinInMinutes = dayjs().to(response.data.connections[0].departure);
+            this.oberdorf = dayjs(response.data.connections[1].departure).format('HH:mm');
+            this.oberdorfInMinutes = dayjs().to(response.data.connections[1].departure);
+            
         }, 5000);
     },
-    template: '<div><h1 class="title">ÖV</h1><p class="subtitle">WB nach Liestal</p><h2><small style="font-size: 50%; margin-right: 50px;">{{hoelstein}} Uhr</small>{{hoelsteinInMinutes}}</h2></div>'
+    template: '<div><h1 class="title">ÖV</h1><p class="subtitle">nach Hölstein</p><h2><small style="font-size: 50%; margin-right: 20px;">{{hoelstein}} Uhr</small>{{hoelsteinInMinutes}}</h2><p class="subtitle">nach Oberdorf</p><h2><small style="font-size: 50%; margin-right: 20px;">{{oberdorf}} Uhr</small>{{oberdorfInMinutes}}</h2></div>'
 });
 
 Vue.component('widget-essential-photos', {
