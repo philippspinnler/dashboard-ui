@@ -9,7 +9,7 @@ body {
     font-family: 'Roboto', sans-serif;
     color: white;
     background-color: black;
-    font-size: 290%; 
+    font-size: 220%; 
 }
 
 #app {
@@ -21,7 +21,7 @@ body {
 }
 
 .container {
-    padding: 50px;
+    padding: 20px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing:    border-box;
     -ms-box-sizing:     border-box;
@@ -107,23 +107,23 @@ body {
 }
 
 .widget-calendar .event-container {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .widget-calendar .event-container:last-child {
-    margin-bottom: 100px;
+    margin-bottom: 60px;
 }
 
 .widget-calendar .event {
     background-color: rgb(255, 255, 255, 0.2);
-    padding: 50px;
+    padding: 20px;
 }
 
 .widget-calendar .event-birthday {
     background-color: rgb(255, 255, 255, 0.2);
     display: flex;
     justify-content: space-between;
-    padding: 50px;
+    padding: 20px;
     align-items: center;
 }
 
@@ -192,6 +192,28 @@ body {
 
 .widget-sonos .sonos-container .artwork {
     margin-left: 50px;
+}
+
+/****************/
+/**** SIMPLE QUOTE *****/
+/****************/
+.widget-simple-quote {
+    text-align: right;
+}
+
+.widget-simple-quote .artwork > img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    opacity: 0.5;
+}
+
+.widget-simple-quote h2 {
+    font-size: 120%;
+}
+
+.widget-simple-quote p {
+    color: rgb(255, 255, 255, 0.4);
 }
 
 /****************/

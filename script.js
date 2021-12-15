@@ -109,146 +109,24 @@ Vue.component('widget-calendar', {
     template: `<div><div v-for="group in groupped"><div class="date-container"><div class="day"><h1 class="title">{{group.dateDay}}</h1></div><div class="date subtitle">{{group.date}}</div></div><div class="event-container" v-for="event in group.events"><div class="event-birthday" v-if="event.birthday"><div><h2><i class="fa fa-gift" /> {{event.birthday.name}}</h2></div><div>{{event.birthday.age}}</div></div><div class="event" v-if="!event.birthday" v-bind:style="{ borderLeft: 'solid #'+event.color+' 10px' }"><div v-if="event.allDay" class="event-all-day"><span>{{event.startTime}}</span></div><h2 v-if="!event.allDay">{{event.startTime}}</h2>{{event.summary}}</div></div></div></div>`
 });
 
-Vue.component('widget-sonos', {
+Vue.component('widget-simple-quote', {
     data() {
         return {
+            quote: '',
             name: '',
-            detail: '',
-            image: '',
-            currentlyPlaying: false
+            picture_url: ''
         }
     },
     mounted() {
         setInterval(async () => {
-            const response = await axios.get(`${baseUrl}/sonos`);
-                
-            if (response.status == 204) {
-                this.currentlyPlaying = false;
-            } else {
-                this.currentlyPlaying = true;
-                this.name = response.data.name;
-                this.detail = response.data.detail;
-                this.image = response.data.image;
-            }
+            const response = await axios.get(`${baseUrl}/simple-quote`);
+            this.quote = response.data.quote;
+            this.name = response.data.name;
+            this.picture_url = response.data.picture_url;
         }, 5000);
         
     },
-    template: `<div><h1 class="title">Sonos</h1><div v-if="!currentlyPlaying"><p class="subtitle">Zurzeit wird nichts abgespielt</p></div><div v-if="currentlyPlaying" class="sonos-container"><div><h2>{{name}}</h2><p>{{detail}}</p></div><div v-if="image" class="artwork"><img v-bind:src="image"/></div></div></div>`
-});
-
-Vue.component('widget-netatmo', {
-    data() {
-        return {
-            inside: '',
-            co2: '',
-            outside: ''
-        }
-    },
-    mounted() {
-        setInterval(async () => {
-            const response = await axios.get(`${baseUrl}/netatmo`);
-            this.inside = response.data.temperature;
-            this.co2 = response.data.co2;
-            this.outside = response.data.modules[0].temperature;
-        }, 5000);
-    },
-    template: '<div><h1 class="title">Netatmo</h1><p class="subtitle">Innen</p><h2>{{inside}} °C</h2><p class="subtitle">Aussen</p><h2>{{outside}} °C</h2><p class="subtitle">CO2</p><h2>{{co2}} ppm</h2></div>'
-});
-
-Vue.component('widget-public-transportation', {
-    data() {
-        return {
-            hoelstein: '',
-            hoelsteinInMinutes: '',
-        }
-    },
-    mounted() {
-        setInterval(async () => {
-            const response = await axios.get(`${baseUrl}/public-transportation?connections=[["Hoelstein-Weidbaechli", "Liestal"]]`);
-            this.hoelstein = dayjs(response.data.connections[0].departure).format('HH:mm');
-            this.hoelsteinInMinutes = dayjs().to(response.data.connections[0].departure);
-        }, 5000);
-    },
-    template: '<div><h1 class="title">ÖV</h1><p class="subtitle">WB nach Liestal</p><h2><small style="font-size: 50%; margin-right: 50px;">{{hoelstein}} Uhr</small>{{hoelsteinInMinutes}}</h2></div>'
-});
-
-Vue.component('widget-essential-photos', {
-    data() {
-        return {
-            facebook: '',
-            instagram: '',
-        }
-    },
-    mounted() {
-        setInterval(async () => {
-            const response = await axios.get(`${baseUrl}/essential-photos`);
-            this.facebook = response.data.facebook;
-            this.instagram = response.data.instagram;
-        }, 5000);
-    },
-    template: '<div><h1 class="title">Essentail-Photos</h1><h2>{{facebook}} <i class="fab fa-facebook-square"></i> {{instagram}} <i class="fab fa-instagram-square"></i></h2></div>'
-});
-
-Vue.component('widget-withings', {
-    data() {
-        return {
-            mona: '',
-            philipp: '',
-        }
-    },
-    mounted() {
-        setInterval(async () => {
-            const response = await axios.get(`${baseUrl}/withings`);
-            this.mona = response.data.Mona.deltaSinceLastMeasure;
-            this.philipp = response.data.Philipp.deltaSinceLastMeasure;
-        }, 5000);
-    },
-    template: '<div><h1 class="title">Withings</h1><p class="subtitle">Mona</p><h2>{{mona}} kg</h2><p class="subtitle">Philipp</p><h2>{{philipp}} kg</h2></div>'
-});
-
-Vue.component('widget-internet', {
-    data() {
-        return {
-            download: '',
-            upload: '',
-            speedtestDownload: '',
-            speedtestUpload: '',
-        }
-    },
-    mounted() {
-        setInterval(async () => {
-            const response = await axios.get(`http://10.0.86.11:3000/api/overall`);
-            this.download = response.data.donwloadUsagePretty;
-            this.upload = response.data.uploadUsagePretty;
-            this.speedtestDownload = response.data.speedTestResult.downloadSpeedPretty;
-            this.speedtestUpload = response.data.speedTestResult.uploadSpeedPretty;
-        }, 5000);
-    },
-    template: '<div><h1 class="title">Internet</h1><p class="subtitle">Traffic</p><h2>{{download}} <i class="fas fa-chevron-down"></i> {{upload}} <i class="fas fa-chevron-up"></i></h2><p class="subtitle">Speedtest</p><h2>{{speedtestDownload}} <i class="fas fa-chevron-down"></i> {{speedtestUpload}} <i class="fas fa-chevron-up"></i></h2></div>'
-});
-
-Vue.component('widget-eo-guide', {
-    data() {
-        return {
-            total: '',
-            review: '',
-            stars: '',
-            starsArray: []
-        }
-    },
-    mounted() {
-        setInterval(async () => {
-            const response = await axios.get(`${baseUrl}/eo-guide`);
-            this.total = response.data.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'");
-            this.review = response.data.latestReview.reviewFormatted;
-            this.stars = response.data.latestReview.stars;
-            this.starsArray = [];
-            for (let x = 0; x < this.stars; x++) {
-                this.starsArray.push('');
-            }
-        }, 5000);
-    },
-    template: '<div><h1 class="title">EO-Guide</h1><p class="subtitle">Total Downloads</p><h2>{{total}}</h2><p class="subtitle">Letzte Bewertung</p><h3>{{review}}<br><i v-for="star in starsArray" class="fas fa-star"></i></h3></div>'
+    template: `<div><h1 class="title">Zitat</h1><div><h2>{{quote}}</h2><p>{{name}}</p></div><div v-if="picture_url" class="artwork"><img v-bind:src="picture_url"/></div></div>`
 });
 
 Vue.component('widget-weather', {
@@ -264,7 +142,7 @@ Vue.component('widget-weather', {
     },
     mounted() {
         setInterval(async () => {
-            const response = await axios.get(`${baseUrl}/weather`);
+            const response = await axios.get(`${baseUrl}/weather?lat=47.0008014&lon=7.4583008`);
             const icons = {
                 "01d": "fa fa-sun",
                 "02d": "fa fa-cloud-sun",
