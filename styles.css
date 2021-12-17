@@ -73,6 +73,9 @@ body {
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: 50%;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
 }
 
 .container-bottom {
@@ -174,27 +177,6 @@ body {
 }
 
 /****************/
-/**** SONOS *****/
-/****************/
-.widget-sonos {
-    text-align: right;
-}
-
-.widget-sonos .sonos-container {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.widget-sonos .sonos-container .artwork > img {
-    height: 160px;
-    width: 160px;
-}
-
-.widget-sonos .sonos-container .artwork {
-    margin-left: 50px;
-}
-
-/****************/
 /**** SIMPLE QUOTE *****/
 /****************/
 .widget-simple-quote {
@@ -202,10 +184,12 @@ body {
 }
 
 .widget-simple-quote .artwork > img {
-    width: 250px;
-    height: 250px;
+    margin-top: 50px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
-    opacity: 0.5;
+    opacity: 0.7;
+    border-radius: 50%;
 }
 
 .widget-simple-quote h2 {
@@ -217,57 +201,16 @@ body {
 }
 
 /****************/
-/*** NETATMO ****/
-/****************/
-.widget-netatmo {
-    text-align: right;
-}
-
-/******************************/
-/*** PUBLIC-TRANSPORTATION ****/
-/******************************/
-.widget-public-transportation {
-    text-align: right;
-}
-
-/*************************/
-/*** ESSENTAIL-PHOTOS ****/
-/*************************/
-.widget-essential-photos {
-    text-align: right;
-}
-
-/*****************/
-/*** Withings ****/
-/*****************/
-.widget-withings {
-    text-align: right;
-}
-
-/*****************/
-/*** EO-Guide ****/
-/*****************/
-.widget-eo-guide {
-    text-align: right;
-}
-
-/*****************/
-/*** INTERNET ****/
-/*****************/
-.widget-internet {
-    text-align: right;
-}
-
-/****************/
 /*** Weather ****/
 /****************/
-.widget-weather {
-    
+.widget-weather h1 {
+    text-align: right;
 }
 
 .widget-weather .weather-container {
     display: flex;
     justify-content: space-between;
+    text-align: center;
 }
 
 .widget-weather .current-container h1 {

@@ -126,7 +126,17 @@ Vue.component('widget-simple-quote', {
         }, 5000);
         
     },
-    template: `<div><h1 class="title">Zitat</h1><div><h2>{{quote}}</h2><p>{{name}}</p></div><div v-if="picture_url" class="artwork"><img v-bind:src="picture_url"/></div></div>`
+    template: `
+        <div>
+            <h1 class="title">Zitat des Tages</h1>
+            <div>
+                <h2>{{quote}}</h2>
+            </div>
+            <div v-if="picture_url" class="artwork">
+                <img v-bind:src="picture_url"/>
+                <p>{{name}}</p>
+            </div>
+        </div>`
 });
 
 Vue.component('widget-weather', {
@@ -186,6 +196,79 @@ Vue.component('widget-weather', {
         }, 5000);
     },
     template: '<div class="weather-container"><div class="current-container"><h1><i v-bind:class="current.weather.faIcon"></i></h1><h2>{{current.temperature}} °C</h2></div><div class="daily-container" v-for="day in daily"><h2>{{day.dateDay}}</h2><h2><i v-bind:class="day.weather.faIcon"></i></h2><h3>{{day.temperature.max}} °C</h3><h3>{{day.temperature.min}} °C</h3></div></div>'
+});
+
+Vue.component('widget-weather-lampi', {
+    data() {
+        return {
+            current: {
+                temperature: '',
+                temperatureFeelsLike: '',
+                weather: {}
+            },
+            daily: []
+        }
+    },
+    mounted() {
+        setInterval(async () => {
+            const response = await axios.get(`${baseUrl}/weather?lat=47.422287143450156&lon=7.756266546616501`);
+            const icons = {
+                "01d": "fa fa-sun",
+                "02d": "fa fa-cloud-sun",
+                "03d": "fa fa-cloud",
+                "04d": "fa fa-cloud",
+                "09d": "fa fa-cloud-showers-heavy",
+                "10d": "fa fa-cloud-sun-rain",
+                "11d": "fa fa-bolt",
+                "13d": "fa fa-snowflake",
+                "50d": "fa fa-smog",
+                "01n": "fa fa-sun",
+                "02n": "fa fa-cloud-sun",
+                "03n": "fa fa-cloud",
+                "04n": "fa fa-cloud",
+                "09n": "fa fa-cloud-showers-heavy",
+                "10n": "fa fa-cloud-sun-rain",
+                "11n": "fa fa-bolt",
+                "13n": "fa fa-snowflake",
+                "50n": "fa fa-smog"
+            };
+            this.current.temperature = Math.round(response.data.current.temperature * 10) / 10;
+            this.current.temperatureFeelsLike = Math.round(response.data.current.temperatureFeelsLike * 10) / 10;
+            this.current.weather = response.data.current.weather[0];
+            this.current.weather.faIcon = icons[this.current.weather.icon];
+            this.daily = response.data.daily.map(day => {
+                return {
+                    dateDay: dayjs(day.date).format("dd"),
+                    temperature: {
+                        min: Math.round(day.temperature.min * 10) / 10,
+                        max: Math.round(day.temperature.max * 10) / 10
+                    },
+                    weather: day.weather.map(weather => {
+                        return {
+                            ...weather,
+                            faIcon: icons[weather.icon]
+                        }
+                    })[0]
+                }
+            });
+            this.daily = this.daily.slice(0, 3)
+        }, 5000);
+    },
+    template: `
+        <div>
+            <div>
+                <h1 class="title">Lampenberg</h1>
+            </div>
+            <div class="weather-container">
+                <div class="daily-container" v-for="day in daily">
+                    <h2>{{day.dateDay}}</h2>
+                    <h2><i v-bind:class="day.weather.faIcon"></i></h2>
+                    <h3>{{day.temperature.max}} °C</h3>
+                    <h3>{{day.temperature.min}} °C</h3>
+                </div>
+            </div>
+        </div>
+        `
 });
 
 new Vue({
