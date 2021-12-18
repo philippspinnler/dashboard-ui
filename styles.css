@@ -141,6 +141,7 @@ body {
 }
 
 .widget-calendar .event-all-day {
+    font-size: 40%;
     margin-bottom: 20px;
 }
 

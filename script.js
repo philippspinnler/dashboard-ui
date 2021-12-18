@@ -106,7 +106,7 @@ Vue.component('widget-calendar', {
         }, 5000);
         
     },
-    template: `<div><div v-for="group in groupped"><div class="date-container"><div class="day"><h1 class="title">{{group.dateDay}}</h1></div><div class="date subtitle">{{group.date}}</div></div><div class="event-container" v-for="event in group.events"><div class="event-birthday" v-if="event.birthday"><div><h2><i class="fa fa-gift" /> {{event.birthday.name}}</h2></div><div>{{event.birthday.age}}</div></div><div class="event" v-if="!event.birthday" v-bind:style="{ borderLeft: 'solid #'+event.color+' 10px' }"><div v-if="event.allDay" class="event-all-day"><span>{{event.startTime}}</span></div><h2 v-if="!event.allDay">{{event.startTime}}</h2>{{event.summary}}</div></div></div></div>`
+    template: `<div><div v-for="group in groupped"><div class="date-container"><div class="day"><h1 class="title">{{group.dateDay}}</h1></div><div class="date subtitle">{{group.date}}</div></div><div class="event-container" v-for="event in group.events"><div class="event-birthday" v-if="event.birthday"><div><h2><i class="fa fa-gift" /> {{event.birthday.name}}</h2></div><div>{{event.birthday.age}}</div></div><div class="event" v-if="!event.birthday" v-bind:style="{ borderLeft: 'solid #'+event.color+' 7px' }"><div v-if="event.allDay" class="event-all-day"><span>{{event.startTime}}</span></div><h2 v-if="!event.allDay">{{event.startTime}}</h2>{{event.summary}}</div></div></div></div>`
 });
 
 Vue.component('widget-simple-quote', {
@@ -289,7 +289,7 @@ new Vue({
         const transistionStepSpeed = 50;
 
         const fadeToBlack = async () => {
-            for (let x = 0.55; x <=1.05; x=x+0.05) {
+            for (let x = 0.45; x <=1.05; x=x+0.05) {
                 this.backgroundColor = `rgba(0, 0, 0, ${x})`;
                 await new Promise(r => setTimeout(r, transistionStepSpeed));
             }
@@ -297,7 +297,7 @@ new Vue({
 
         const fadeToTransparent = async () => {
             await new Promise(r => setTimeout(r, 1000));
-            for (let x = 0.9; x >= 0.5; x = x - 0.05) {
+            for (let x = 0.9; x >= 0.4; x = x - 0.05) {
                 this.backgroundColor = `rgba(0, 0, 0, ${x})`;
                 await new Promise(r => setTimeout(r, transistionStepSpeed));
             }
