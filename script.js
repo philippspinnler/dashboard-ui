@@ -289,7 +289,7 @@ new Vue({
         const transistionStepSpeed = 50;
 
         const fadeToBlack = async () => {
-            for (let x = 0.45; x <=1.05; x=x+0.05) {
+            for (let x = 0.55; x <=1.05; x=x+0.05) {
                 this.backgroundColor = `rgba(0, 0, 0, ${x})`;
                 await new Promise(r => setTimeout(r, transistionStepSpeed));
             }
@@ -297,7 +297,7 @@ new Vue({
 
         const fadeToTransparent = async () => {
             await new Promise(r => setTimeout(r, 1000));
-            for (let x = 0.9; x >= 0.4; x = x - 0.05) {
+            for (let x = 0.9; x >= 0.5; x = x - 0.05) {
                 this.backgroundColor = `rgba(0, 0, 0, ${x})`;
                 await new Promise(r => setTimeout(r, transistionStepSpeed));
             }
