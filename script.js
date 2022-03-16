@@ -217,11 +217,12 @@ Vue.component('widget-internet', {
     },
     mounted() {
         setInterval(async () => {
-            const response = await axios.get(`http://10.0.86.11:3000/api/overall`);
-            this.download = response.data.donwloadUsagePretty;
-            this.upload = response.data.uploadUsagePretty;
-            this.speedtestDownload = response.data.speedTestResult.downloadSpeedPretty;
-            this.speedtestUpload = response.data.speedTestResult.uploadSpeedPretty;
+            const response = await axios.get(`${baseUrl}/unifi`);
+            const responseSpeedtest = await axios.get(`${baseUrl}/speedtest`);
+            this.download = response.data.currentDownFormatted;
+            this.upload = response.data.currentUpFormatted;
+            this.speedtestDownload = responseSpeedtest.data.downloadFormatted;
+            this.speedtestUpload = responseSpeedtest.data.uploadFormatted;
         }, 5000);
     },
     template: '<div><h1 class="title">Internet</h1><p class="subtitle">Traffic</p><h2>{{download}} <i class="fas fa-chevron-down"></i> {{upload}} <i class="fas fa-chevron-up"></i></h2><p class="subtitle">Speedtest</p><h2>{{speedtestDownload}} <i class="fas fa-chevron-down"></i> {{speedtestUpload}} <i class="fas fa-chevron-up"></i></h2></div>'
