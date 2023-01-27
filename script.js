@@ -164,7 +164,7 @@ Vue.component('widget-public-transportation', {
     },
     mounted() {
         setInterval(async () => {
-            const response = await axios.get(`${baseUrl}/public-transportation?connections=[["Hoelstein, Sued", "Liestal"]]`);
+            const response = await axios.get(`${baseUrl}/public-transportation?connections=[["Hölstein, Süd", "Liestal, Bahnhof"]]`);
             this.hoelstein = dayjs(response.data.connections[0].departure).format('HH:mm');
             this.hoelsteinInMinutes = dayjs().to(response.data.connections[0].departure);
         }, 5000);
