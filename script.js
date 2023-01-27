@@ -69,7 +69,7 @@ Vue.component('widget-calendar', {
     mounted() {
         setInterval(async () => {
             const response = await axios.get(`${baseUrl}/ical`);
-        
+
             const groupped = []
             for (let group of response.data.groupped) {
                 group.dateDay = dayjs(group.date).calendar();
@@ -86,9 +86,9 @@ Vue.component('widget-calendar', {
 
 
                         let name;
-                        
+
                         if (birthYearMatch) {
-                            name = event.summary.split(' ').slice(1, event.summary.split(' ').length-1).join(' ');
+                            name = event.summary.split(' ').slice(1, event.summary.split(' ').length - 1).join(' ');
                         } else {
                             name = event.summary.split(' ').slice(1).join(' ');
                         }
@@ -104,7 +104,7 @@ Vue.component('widget-calendar', {
             }
             this.groupped = groupped;
         }, 5000);
-        
+
     },
     template: `<div><div v-for="group in groupped"><div class="date-container"><div class="day"><h1 class="title">{{group.dateDay}}</h1></div><div class="date subtitle">{{group.date}}</div></div><div class="event-container" v-for="event in group.events"><div class="event-birthday" v-if="event.birthday"><div><h2><i class="fa fa-gift" /> {{event.birthday.name}}</h2></div><div>{{event.birthday.age}}</div></div><div class="event" v-if="!event.birthday" v-bind:style="{ borderLeft: 'solid #'+event.color+' 10px' }"><div v-if="event.allDay" class="event-all-day"><span>{{event.startTime}}</span></div><h2 v-if="!event.allDay">{{event.startTime}}</h2>{{event.summary}}</div></div></div></div>`
 });
@@ -121,7 +121,7 @@ Vue.component('widget-sonos', {
     mounted() {
         setInterval(async () => {
             const response = await axios.get(`${baseUrl}/sonos`);
-                
+
             if (response.status == 204) {
                 this.currentlyPlaying = false;
             } else {
@@ -131,7 +131,7 @@ Vue.component('widget-sonos', {
                 this.image = response.data.image;
             }
         }, 5000);
-        
+
     },
     template: `<div><h1 class="title">Sonos</h1><div v-if="!currentlyPlaying"><p class="subtitle">Zurzeit wird nichts abgespielt</p></div><div v-if="currentlyPlaying" class="sonos-container"><div><h2>{{name}}</h2><p>{{detail}}</p></div><div v-if="image" class="artwork"><img v-bind:src="image"/></div></div></div>`
 });
@@ -164,7 +164,7 @@ Vue.component('widget-public-transportation', {
     },
     mounted() {
         setInterval(async () => {
-            const response = await axios.get(`${baseUrl}/public-transportation?connections=[["Hoelstein-Weidbaechli", "Liestal"]]`);
+            const response = await axios.get(`${baseUrl}/public-transportation?connections=[["Hoelstein, Sued", "Liestal"]]`);
             this.hoelstein = dayjs(response.data.connections[0].departure).format('HH:mm');
             this.hoelsteinInMinutes = dayjs().to(response.data.connections[0].departure);
         }, 5000);
@@ -329,7 +329,7 @@ new Vue({
         const transistionStepSpeed = 50;
 
         const fadeToBlack = async () => {
-            for (let x = 0.55; x <=1.05; x=x+0.05) {
+            for (let x = 0.55; x <= 1.05; x = x + 0.05) {
                 this.backgroundColor = `rgba(0, 0, 0, ${x})`;
                 await new Promise(r => setTimeout(r, transistionStepSpeed));
             }
@@ -342,7 +342,7 @@ new Vue({
                 await new Promise(r => setTimeout(r, transistionStepSpeed));
             }
         }
-        
+
         await getImages();
         await fadeToTransparent();
 
@@ -350,6 +350,6 @@ new Vue({
             await fadeToBlack();
             await getImages();
             await fadeToTransparent();
-        }, 5*1000*60);
+        }, 5 * 1000 * 60);
     }
 });
