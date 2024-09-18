@@ -220,8 +220,8 @@ Vue.component('widget-eo-guide', {
         setInterval(async () => {
             const response = await axios.get(`${baseUrl}/eo-guide`);
             this.total = response.data.total_formatted;
-            this.review = response.data.latestReview.review_formatted;
-            this.stars = response.data.latestReview.stars;
+            this.review = response.data.latest_review.review_formatted;
+            this.stars = response.data.latest_review.stars;
             this.starsArray = [];
             for (let x = 0; x < this.stars; x++) {
                 this.starsArray.push('');
