@@ -309,7 +309,7 @@ new Vue({
 
         const getImages = async () => {
             const response = await axios.get(`${baseUrl}/album`)
-            this.image = baseUrl + response.data.images[Math.floor(Math.random() * response.data.images.length)]
+            this.image = response.data.images[Math.floor(Math.random() * response.data.images.length)]
         }
 
         const transistionStepSpeed = 50;
