@@ -46,14 +46,6 @@ body {
     flex-basis: 10%;
 }
 
-.container-top-left {
-
-}
-
-.container-top-right {
-
-}
-
 .container-content {
     display: flex;
 
@@ -98,9 +90,6 @@ body {
 /****************/
 /*** CALENDAR ***/
 /****************/
-.widget-calendar {
-}
-
 .widget-calendar span.small-date {
     font-size: 50%;
     float: right;
@@ -151,9 +140,6 @@ body {
 /****************/
 /**** CLOCK *****/
 /****************/
-.widget-clock {
-}
-
 .widget-clock .clock-container {
     display: flex;
     margin-bottom: -30px;
@@ -239,10 +225,6 @@ body {
 /****************/
 /*** Weather ****/
 /****************/
-.widget-weather {
-    
-}
-
 .widget-weather .weather-container {
     display: flex;
     justify-content: space-between;
