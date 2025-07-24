@@ -103,6 +103,14 @@ Vue.component('widget-sonos', {
             currentlyPlaying: false
         }
     },
+    computed: {
+        truncatedName() {
+            if (this.name.length > 20) {
+                return this.name.slice(0, 20) + '...';
+            }
+            return this.name;
+        }
+    },
     mounted() {
         setInterval(async () => {
             const response = await axios.get(`${baseUrl}/sonos`);
@@ -121,11 +129,41 @@ Vue.component('widget-sonos', {
             </div>
             <div v-if="currentlyPlaying" class="sonos-container">
                 <div>
-                    <h2>{{name}}</h2>
+                    <h2>{{truncatedName}}</h2>
                     <p>{{detail}}</p>
                 </div>
                 <div v-if="image" class="artwork">
                     <img v-bind:src="image"/>
+                </div>
+            </div>
+        </div>`
+});
+
+Vue.component('widget-presence', {
+    data() {
+        return {
+            persons: [],
+        }
+    },
+    mounted() {
+        setInterval(async () => {
+            const response = await axios.get(`${baseUrl}/presence`);
+            this.persons = response.data.persons;
+        }, 5000);
+
+    },
+    template: `
+        <div>
+            <h1 class="title">Anwesend</h1>
+            <div v-if="persons" class="presence-container">
+                <div v-for="person in persons" class="precense-person">
+                <h2 :class="{'muted': person.state === 'not_home'}">{{person.name}}</h2>
+                <img
+                    v-if="person.avatar_url"
+                    v-bind:src="person.avatar_url"
+                    class="presence-avatar"
+                    :class="{'muted': person.state === 'not_home'}"
+                />
                 </div>
             </div>
         </div>`

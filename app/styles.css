@@ -233,3 +233,41 @@ body {
 .widget-weather .current-container h1 {
     font-size: 400%;
 }
+
+/*****************/
+/*** Presence ****/
+/*****************/
+.widget-presence {
+    text-align: right;
+}
+
+.widget-presence .precense-person {
+  display: flex;
+  flex-direction: row;
+  align-items: center;     /* Vertically center the items */
+  justify-content: flex-end;
+  gap: 50px;               /* 20px gap between name and avatar */
+  margin-bottom: 24px;
+}
+
+.widget-presence .precense-person h2 {
+  margin: 0;               /* Remove default margin for vertical centering */
+}
+
+.widget-presence .presence-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;      /* Optional: makes avatar circular */
+  object-fit: cover;       /* Ensures the image covers the box */
+  display: block;
+}
+
+.widget-presence .precense-person:last-child {
+  margin-bottom: 0; /* Optional: removes space after the last person */
+}
+
+.widget-presence .muted {
+  opacity: 0.5;
+  filter: grayscale(80%);
+  transition: opacity 0.3s, filter 0.3s;
+}
