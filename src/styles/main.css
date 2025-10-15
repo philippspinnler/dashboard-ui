@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  background-color: black;
+  font-size: 290%;
+}
+
+#app {
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-position: center;
+}
+
+.container {
+  padding: 50px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+
+  display: flex;
+
+  height: 100vh;
+  width: 100vw;
+
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.container-top {
+  display: flex;
+  justify-content: space-between;
+  flex-basis: 10%;
+}
+
+.container-content {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.container-content-left {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 50%;
+}
+
+.container-content-right {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 50%;
+}
+
+.container-bottom {
+  flex-basis: 10%;
+}
+
+.widget {
+  padding: 50px;
+  overflow: hidden;
+}
+
+.widget .title {
+  text-transform: uppercase;
+  color: rgb(255, 255, 255, 0.4);
+}
+
+.widget .subtitle {
+  text-transform: uppercase;
+  color: rgb(255, 255, 255, 0.7);
+}
+
+/* Right-aligned widgets */
+.widget-sonos,
+.widget-netatmo,
+.widget-public-transportation,
+.widget-eo-guide,
+.widget-internet,
+.widget-presence {
+  text-align: right;
+}
