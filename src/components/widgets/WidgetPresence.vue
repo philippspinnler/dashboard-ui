@@ -35,9 +35,6 @@ usePolling(fetchPresence, 5000)
 </script>
 
 <style scoped>
-.presence-container {
-}
-
 .presence-person {
   display: flex;
   flex-direction: row;
