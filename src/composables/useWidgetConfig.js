@@ -1,4 +1,14 @@
 export function useWidgetConfig() {
+  // Get environment variable with fallback: runtime config (Docker) -> build-time config (local dev)
+  const getEnvValue = (key) => {
+    // Try runtime config first (window.ENV from config.js)
+    if (window.ENV && window.ENV[key] && !window.ENV[key].startsWith('__')) {
+      return window.ENV[key]
+    }
+    // Fall back to build-time config (import.meta.env from .env)
+    return import.meta.env[key] || ''
+  }
+
   // Parse comma-separated environment variables into arrays
   const parseWidgets = (envValue) => {
     if (!envValue || envValue.trim() === '') {
@@ -8,9 +18,9 @@ export function useWidgetConfig() {
   }
 
   // Get widget configurations from environment variables
-  const leftWidgets = parseWidgets(import.meta.env.VITE_WIDGETS_LEFT)
-  const rightWidgets = parseWidgets(import.meta.env.VITE_WIDGETS_RIGHT)
-  const bottomWidgets = parseWidgets(import.meta.env.VITE_WIDGETS_BOTTOM)
+  const leftWidgets = parseWidgets(getEnvValue('VITE_WIDGETS_LEFT'))
+  const rightWidgets = parseWidgets(getEnvValue('VITE_WIDGETS_RIGHT'))
+  const bottomWidgets = parseWidgets(getEnvValue('VITE_WIDGETS_BOTTOM'))
 
   return {
     leftWidgets,
