@@ -56,12 +56,14 @@ body {
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 50%;
+  text-align: left;
 }
 
 .container-content-right {
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 50%;
+  text-align: right;
 }
 
 .container-bottom {
@@ -83,12 +85,27 @@ body {
   color: rgb(255, 255, 255, 0.7);
 }
 
-/* Right-aligned widgets */
-.widget-sonos,
-.widget-netatmo,
-.widget-public-transportation,
-.widget-eo-guide,
-.widget-internet,
-.widget-presence {
-  text-align: right;
+/* Sonos widget layout adjustments */
+.container-content-right .sonos-container {
+  justify-content: flex-end;
+}
+
+.container-content-left .sonos-container {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+}
+
+.container-content-left .sonos-container .artwork {
+  margin-left: 0;
+  margin-right: 1.1rem;
+}
+
+/* Presence widget layout adjustments */
+.container-content-right .presence-person {
+  justify-content: flex-end;
+}
+
+.container-content-left .presence-person {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
 }

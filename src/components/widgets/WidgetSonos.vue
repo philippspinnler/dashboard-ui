@@ -50,7 +50,6 @@ usePolling(fetchSonos, 10000)
 <style scoped>
 .sonos-container {
   display: flex;
-  justify-content: flex-end;
 }
 
 .sonos-container .artwork > img {

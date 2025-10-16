@@ -3,37 +3,34 @@
     <div class="container" :style="{ backgroundColor: backgroundColor }">
       <div class="container-content">
         <div class="container-content-left">
-          <div class="widget widget-clock">
-            <WidgetClock />
-          </div>
-          <div class="widget widget-calendar">
-            <WidgetCalendar />
+          <div 
+            v-for="widgetId in leftWidgets" 
+            :key="widgetId" 
+            class="widget" 
+            :class="`widget-${widgetId}`"
+          >
+            <component :is="widgetComponents[widgetId]" v-if="widgetComponents[widgetId]" />
           </div>
         </div>
         <div class="container-content-right">
-          <div class="widget widget-sonos">
-            <WidgetSonos />
-          </div>
-          <div class="widget widget-presence">
-            <WidgetPresence />
-          </div>
-          <div class="widget widget-internet">
-            <WidgetInternet />
-          </div>
-          <div class="widget widget-netatmo">
-            <WidgetNetatmo />
-          </div>
-          <div class="widget widget-public-transportation">
-            <WidgetPublicTransportation />
-          </div>
-          <div class="widget widget-eo-guide">
-            <WidgetEoGuide />
+          <div 
+            v-for="widgetId in rightWidgets" 
+            :key="widgetId" 
+            class="widget" 
+            :class="`widget-${widgetId}`"
+          >
+            <component :is="widgetComponents[widgetId]" v-if="widgetComponents[widgetId]" />
           </div>
         </div>
       </div>
       <div class="container-bottom">
-        <div class="widget widget-weather">
-          <WidgetWeather />
+        <div 
+          v-for="widgetId in bottomWidgets" 
+          :key="widgetId" 
+          class="widget" 
+          :class="`widget-${widgetId}`"
+        >
+          <component :is="widgetComponents[widgetId]" v-if="widgetComponents[widgetId]" />
         </div>
       </div>
     </div>
@@ -43,6 +40,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useApi } from './composables/useApi'
+import { useWidgetConfig } from './composables/useWidgetConfig'
 import WidgetClock from './components/widgets/WidgetClock.vue'
 import WidgetCalendar from './components/widgets/WidgetCalendar.vue'
 import WidgetSonos from './components/widgets/WidgetSonos.vue'
@@ -54,6 +52,21 @@ import WidgetEoGuide from './components/widgets/WidgetEoGuide.vue'
 import WidgetWeather from './components/widgets/WidgetWeather.vue'
 
 const { get } = useApi()
+const { leftWidgets, rightWidgets, bottomWidgets } = useWidgetConfig()
+
+// Component mapping
+const widgetComponents = {
+  'clock': WidgetClock,
+  'calendar': WidgetCalendar,
+  'sonos': WidgetSonos,
+  'presence': WidgetPresence,
+  'internet': WidgetInternet,
+  'netatmo': WidgetNetatmo,
+  'public-transportation': WidgetPublicTransportation,
+  'eo-guide': WidgetEoGuide,
+  'weather': WidgetWeather
+}
+
 const image = ref(null)
 const backgroundColor = ref('rgba(0, 0, 0, 1)')
 
