@@ -44,7 +44,7 @@ const fetchSonos = async () => {
   }
 }
 
-usePolling(fetchSonos, 5000)
+usePolling(fetchSonos, 10000)
 </script>
 
 <style scoped>
@@ -54,11 +54,11 @@ usePolling(fetchSonos, 5000)
 }
 
 .sonos-container .artwork > img {
-  height: 160px;
-  width: 160px;
+  height: 3.52rem;
+  width: 3.52rem;
 }
 
 .sonos-container .artwork {
-  margin-left: 50px;
+  margin-left: 1.1rem;
 }
 </style>

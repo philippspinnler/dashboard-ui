@@ -3,7 +3,7 @@
     <h1 class="title">ÖV</h1>
     <p class="subtitle">WB nach Liestal</p>
     <h2>
-      <small style="font-size: 50%; margin-right: 50px">{{ hoelstein }} Uhr</small>
+      <small class="time-label">{{ hoelstein }} Uhr</small>
       {{ hoelsteinInMinutes }}
     </h2>
   </div>
@@ -27,5 +27,5 @@ const fetchPublicTransportation = async () => {
   }
 }
 
-usePolling(fetchPublicTransportation, 5000)
+usePolling(fetchPublicTransportation, 300000)
 </script>

@@ -32,20 +32,20 @@ usePolling(updateTime, 1000)
 <style scoped>
 .widget-clock .clock-container {
   display: flex;
-  margin-bottom: -30px;
+  margin-bottom: -0.7rem;
 }
 
 .widget-clock .time {
-  font-size: 400%;
+  font-size: 4rem;
 }
 
 .widget-clock .seconds {
-  margin-top: 30px;
-  font-size: 150%;
-  margin-left: 10px;
+  margin-top: 0.6rem;
+  font-size: 1.5rem;
+  margin-left: 0.2rem;
 }
 
 .widget-clock .date-container {
-  font-size: 120%;
+  font-size: 1.1rem;
 }
 </style>

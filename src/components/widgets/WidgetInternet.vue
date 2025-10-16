@@ -26,5 +26,5 @@ const fetchSpeedtest = async () => {
   }
 }
 
-usePolling(fetchSpeedtest, 5000)
+usePolling(fetchSpeedtest, 1800000)
 </script>

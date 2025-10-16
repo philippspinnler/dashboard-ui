@@ -1,6 +1,6 @@
 import { onMounted, onUnmounted } from 'vue'
 
-export function usePolling(callback, interval = 5000) {
+export function usePolling(callback, interval = 30000) {
   let intervalId = null
 
   onMounted(() => {

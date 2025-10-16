@@ -35,5 +35,5 @@ const fetchEoGuide = async () => {
   }
 }
 
-usePolling(fetchEoGuide, 5000)
+usePolling(fetchEoGuide, 21600000)
 </script>

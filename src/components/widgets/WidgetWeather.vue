@@ -77,7 +77,7 @@ const fetchWeather = async () => {
   }
 }
 
-usePolling(fetchWeather, 5000)
+usePolling(fetchWeather, 3600000)
 </script>
 
 <style scoped>
@@ -87,6 +87,6 @@ usePolling(fetchWeather, 5000)
 }
 
 .current-container h1 {
-  font-size: 400%;
+  font-size: 4rem;
 }
 </style>

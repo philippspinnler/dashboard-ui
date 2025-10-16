@@ -29,5 +29,5 @@ const fetchNetatmo = async () => {
   }
 }
 
-usePolling(fetchNetatmo, 5000)
+usePolling(fetchNetatmo, 900000)
 </script>

@@ -19,7 +19,7 @@
         <div 
           class="event" 
           v-if="!event.birthday" 
-          :style="{ borderLeft: `solid #${event.color} 10px` }"
+          :style="{ borderLeft: `solid #${event.color} 0.22rem` }"
         >
           <div v-if="event.all_day" class="event-all-day">
             <span>Den ganzen Tag</span>
@@ -47,7 +47,7 @@ const fetchCalendar = async () => {
   }
 }
 
-usePolling(fetchCalendar, 5000)
+usePolling(fetchCalendar, 900000)
 </script>
 
 <style scoped>
@@ -58,38 +58,38 @@ usePolling(fetchCalendar, 5000)
 }
 
 .date-container .date {
-  margin-bottom: 10px;
+  margin-bottom: 0.22rem;
 }
 
 .event-container {
-  margin-bottom: 30px;
+  margin-bottom: 0.66rem;
 }
 
 .event-container:last-child {
-  margin-bottom: 100px;
+  margin-bottom: 2.2rem;
 }
 
 .event {
   background-color: rgb(255, 255, 255, 0.2);
-  padding: 50px;
+  padding: 1.1rem;
 }
 
 .event-birthday {
   background-color: rgb(255, 255, 255, 0.2);
   display: flex;
   justify-content: space-between;
-  padding: 50px;
+  padding: 1.1rem;
   align-items: center;
 }
 
 .event-all-day {
-  margin-bottom: 20px;
+  margin-bottom: 0.44rem;
 }
 
 .event-all-day span {
   background-color: rgb(255, 255, 255, 0.7);
-  padding: 10px;
-  border-radius: 15px;
+  padding: 0.22rem;
+  border-radius: 0.22rem;
   color: rgb(50, 50, 50);
 }
 </style>

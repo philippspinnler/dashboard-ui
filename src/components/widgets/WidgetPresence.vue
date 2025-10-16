@@ -31,7 +31,7 @@ const fetchPresence = async () => {
   }
 }
 
-usePolling(fetchPresence, 5000)
+usePolling(fetchPresence, 120000)
 </script>
 
 <style scoped>
@@ -40,8 +40,8 @@ usePolling(fetchPresence, 5000)
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  gap: 50px;
-  margin-bottom: 24px;
+  gap: 1.1rem;
+  margin-bottom: 0.53rem;
 }
 
 .presence-person h2 {
@@ -49,8 +49,8 @@ usePolling(fetchPresence, 5000)
 }
 
 .presence-avatar {
-  width: 100px;
-  height: 100px;
+  width: 2.2rem;
+  height: 2.2rem;
   border-radius: 50%;
   object-fit: cover;
   display: block;

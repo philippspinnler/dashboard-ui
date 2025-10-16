@@ -5,7 +5,7 @@ const baseURL = import.meta.env.API_BASE_URL || 'https://api.dashboard.monphi.ch
 
 const api = axios.create({
   baseURL,
-  timeout: 10000
+  timeout: 30000
 })
 
 export function useApi() {

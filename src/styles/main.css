@@ -5,11 +5,14 @@
   margin: 0;
 }
 
+html {
+  font-size: 1.2vh;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   color: white;
   background-color: black;
-  font-size: 290%;
 }
 
 #app {
@@ -20,7 +23,7 @@ body {
 }
 
 .container {
-  padding: 50px;
+  padding: 1.1rem;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -66,7 +69,7 @@ body {
 }
 
 .widget {
-  padding: 50px;
+  padding: 1.1rem;
   overflow: hidden;
 }
 
