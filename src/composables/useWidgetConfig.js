@@ -2,7 +2,9 @@ export function useWidgetConfig() {
   // Get environment variable with fallback: runtime config (Docker) -> build-time config (local dev)
   const getEnvValue = (key) => {
     // Try runtime config first (window.ENV from config.js)
-    if (window.ENV && window.ENV[key] && !window.ENV[key].startsWith('__')) {
+    if (window.ENV && window.ENV[key] && 
+        !window.ENV[key].startsWith('__') && 
+        !window.ENV[key].startsWith('${')) {
       return window.ENV[key]
     }
     // Fall back to build-time config (import.meta.env from .env)

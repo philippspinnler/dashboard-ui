@@ -50,6 +50,7 @@ import WidgetNetatmo from './components/widgets/WidgetNetatmo.vue'
 import WidgetPublicTransportation from './components/widgets/WidgetPublicTransportation.vue'
 import WidgetEoGuide from './components/widgets/WidgetEoGuide.vue'
 import WidgetWeather from './components/widgets/WidgetWeather.vue'
+import WidgetCars from './components/widgets/WidgetCars.vue'
 
 const { get } = useApi()
 const { leftWidgets, rightWidgets, bottomWidgets } = useWidgetConfig()
@@ -64,7 +65,8 @@ const widgetComponents = {
   'netatmo': WidgetNetatmo,
   'public-transportation': WidgetPublicTransportation,
   'eo-guide': WidgetEoGuide,
-  'weather': WidgetWeather
+  'weather': WidgetWeather,
+  'cars': WidgetCars
 }
 
 const image = ref(null)
