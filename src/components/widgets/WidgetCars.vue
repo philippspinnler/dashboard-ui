@@ -3,15 +3,17 @@
     <h1 class="title">Autos</h1>
     <!-- Support for multiple cars using v-for loop -->
     <div v-for="car in cars" :key="car.name" class="car-item">
-      <p class="subtitle">{{ car.name }}</p>
+      <h2>{{ car.name }}</h2>
       <div class="car-details">
-        <div class="car-info">
-          <span class="charge-percentage">{{ car.charge_procentage }}%</span>
-          <span class="range">{{ car.range }} km</span>
-          <span v-if="car.charging_status === '1'" class="charging-indicator">⚡ Lädt</span>
-        </div>
-        <div v-if="car.charging_status === '1' && car.end_of_charge" class="charge-time">
-          <small class="time-label">Fertig {{ endOfChargeTime(car.end_of_charge) }}</small>
+        <p class="subtitle">
+          <font-awesome-icon icon="bolt" /> {{ car.charge_procentage }}%
+        </p>
+        <p class="subtitle">
+          <font-awesome-icon icon="gauge" /> {{ car.range }} km
+        </p>
+        <div v-if="car.charging_status === '1'" class="charging-status">
+          <span class="charging-indicator">⚡ Lädt</span>
+          <small v-if="car.end_of_charge" class="time-label">Fertig {{ endOfChargeTime(car.end_of_charge) }}</small>
         </div>
       </div>
     </div>
@@ -50,32 +52,20 @@ usePolling(fetchCars, 300000) // Poll every 5 minutes
   margin-bottom: 0;
 }
 
-.car-details {
+.car-details p {
+  margin-bottom: 0.3rem;
+}
+
+.charging-status {
   margin-top: 0.5rem;
-}
-
-.car-info {
   display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.charge-percentage {
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
-.range {
-  color: rgba(255, 255, 255, 0.8);
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 .charging-indicator {
   color: #4ade80;
   font-size: 0.9em;
-}
-
-.charge-time {
-  margin-top: 0.5rem;
 }
 
 .time-label {

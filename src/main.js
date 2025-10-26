@@ -16,7 +16,8 @@ import {
   faCloudSunRain,
   faBolt,
   faSnowflake,
-  faSmog
+  faSmog,
+  faGauge
 } from '@fortawesome/free-solid-svg-icons'
 
 // Add icons to the library
@@ -32,7 +33,8 @@ library.add(
   faCloudSunRain,
   faBolt,
   faSnowflake,
-  faSmog
+  faSmog,
+  faGauge
 )
 
 // Import global styles
