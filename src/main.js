@@ -9,6 +9,7 @@ import {
   faChevronDown,
   faChevronUp,
   faStar,
+  faStarHalfStroke,
   faSun,
   faCloudSun,
   faCloud,
@@ -25,6 +26,7 @@ import {
   faBatteryThreeQuarters,
   faBatteryFull
 } from '@fortawesome/free-solid-svg-icons'
+import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons'
 
 // Add icons to the library
 library.add(
@@ -32,6 +34,8 @@ library.add(
   faChevronDown,
   faChevronUp,
   faStar,
+  faStarHalfStroke,
+  faStarRegular,
   faSun,
   faCloudSun,
   faCloud,

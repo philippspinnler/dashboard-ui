@@ -1,9 +1,8 @@
 export default {
-  total_formatted: '25.3k',
-  latest_review: {
-    review_formatted: 'Great app! Very helpful for finding charging stations.',
-    stars: 5,
-    author: 'John Doe',
-    date: '2025-10-25'
-  }
+	"net_downloads": {
+		"last_24h": 36,
+		"last_30_days": 828,
+		"total": 70709
+	},
+	"overall_rating": 3.98
 }
