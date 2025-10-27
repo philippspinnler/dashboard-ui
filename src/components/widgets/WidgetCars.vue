@@ -1,21 +1,17 @@
 <template>
   <div>
-    <h1 class="title">Autos</h1>
+    <h1 class="title">{{ cars.length === 1 ? 'Auto' : 'Autos' }}</h1>
     <!-- Support for multiple cars using v-for loop -->
-    <div v-for="car in cars" :key="car.name" class="car-item">
-      <h2>{{ car.name }}</h2>
-      <div class="car-details">
-        <p class="subtitle">
-          <font-awesome-icon icon="bolt" /> {{ car.charge_procentage }}%
-        </p>
-        <p class="subtitle">
-          <font-awesome-icon icon="gauge" /> {{ car.range }} km
-        </p>
-        <div v-if="car.charging_status === '1'" class="charging-status">
-          <span class="charging-indicator">⚡ Lädt</span>
-          <small v-if="car.end_of_charge" class="time-label">Fertig {{ endOfChargeTime(car.end_of_charge) }}</small>
-        </div>
-      </div>
+    <div v-for="car in cars" :key="car.name">
+      <p class="subtitle">{{ car.name }}</p>
+      <h3>
+        <font-awesome-icon :icon="getBatteryIcon(car.charge_procentage)" /> {{ car.charge_procentage }} %
+        <font-awesome-icon icon="charging-station" /> {{ car.range }} km
+      </h3>
+      <h3 v-if="car.charging_active === 'on'">
+        <font-awesome-icon icon="clock" /> geladen {{ endOfChargeTime(car.end_of_charge) }}
+        <font-awesome-icon icon="bolt" /> {{car.charging_power}} kw
+      </h3>
     </div>
   </div>
 </template>
@@ -38,6 +34,14 @@ const fetchCars = async () => {
 
 const endOfChargeTime = (endTime) => {
   return dayjs().to(endTime)
+}
+
+const getBatteryIcon = (percentage) => {
+  if (percentage <= 20) return 'battery-empty'
+  if (percentage <= 40) return 'battery-quarter'
+  if (percentage <= 60) return 'battery-half'
+  if (percentage <= 80) return 'battery-three-quarters'
+  return 'battery-full'
 }
 
 usePolling(fetchCars, 300000) // Poll every 5 minutes

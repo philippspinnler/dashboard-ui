@@ -17,7 +17,13 @@ import {
   faBolt,
   faSnowflake,
   faSmog,
-  faGauge
+  faChargingStation,
+  faClock,
+  faBatteryEmpty,
+  faBatteryQuarter,
+  faBatteryHalf,
+  faBatteryThreeQuarters,
+  faBatteryFull
 } from '@fortawesome/free-solid-svg-icons'
 
 // Add icons to the library
@@ -34,7 +40,13 @@ library.add(
   faBolt,
   faSnowflake,
   faSmog,
-  faGauge
+  faChargingStation,
+  faClock,
+  faBatteryEmpty,
+  faBatteryQuarter,
+  faBatteryHalf,
+  faBatteryThreeQuarters,
+  faBatteryFull
 )
 
 // Import global styles
