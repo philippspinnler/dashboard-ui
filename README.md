@@ -54,7 +54,24 @@ dakboard-ui/
    cp .env.example .env
    ```
 
-4. Update the `API_BASE_URL` in `.env` to point to your backend API
+4. **Choose your development mode:**
+
+   **Option A: Mock Data Mode (Recommended for local development)**
+   - No backend required
+   - Works offline
+   - Edit `.env` and set:
+     ```bash
+     VITE_USE_MOCK_DATA=true
+     ```
+   - See `src/mocks/README.md` for details on customizing mock data
+
+   **Option B: Real API Mode**
+   - Requires backend API connection
+   - Edit `.env` and set:
+     ```bash
+     VITE_USE_MOCK_DATA=false
+     VITE_API_BASE_URL=https://your-api-url.com
+     ```
 
 ### Development
 
@@ -65,6 +82,17 @@ npm run dev
 ```
 
 The application will be available at `http://localhost:5173/`
+
+### Mock Data System
+
+The project includes a comprehensive mock data system for local development:
+
+- **Easy toggle**: Switch between mock and real data with a single environment variable
+- **Realistic data**: Pre-configured mock data for all widgets
+- **Easy customization**: Simple JavaScript files in `src/mocks/`
+- **No backend needed**: Develop UI changes without API dependency
+
+For detailed documentation, see [`src/mocks/README.md`](src/mocks/README.md)
 
 ### Production Build
 

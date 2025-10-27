@@ -1,0 +1,33 @@
+# Dependencies
+node_modules
+npm-debug.log*
+
+# Development files
+.env
+.env.local
+.env.*.local
+
+# Mock data (development only - never deploy)
+src/mocks
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Testing
+coverage
+*.test.js
+*.spec.js
+
+# Misc
+.DS_Store
+README.md
+.prettierrc
+.eslintrc.cjs
