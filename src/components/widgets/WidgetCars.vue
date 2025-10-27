@@ -8,7 +8,7 @@
         <font-awesome-icon :icon="getBatteryIcon(car.charge_procentage)" /> {{ car.charge_procentage }} %
         <font-awesome-icon icon="charging-station" /> {{ car.range }} km
       </h3>
-      <h3 v-if="car.charging_active === 'on'">
+      <h3 v-if="car.charging">
         <font-awesome-icon icon="clock" /> geladen {{ endOfChargeTime(car.end_of_charge) }}
         <font-awesome-icon icon="bolt" /> {{car.charging_power}} kw
       </h3>
