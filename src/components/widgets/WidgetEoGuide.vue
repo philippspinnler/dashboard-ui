@@ -17,7 +17,7 @@
         :key="index"
         :icon="star.icon"
         :class="star.class"
-      /> {{ overall_rating }}
+      /> {{ overall_rating.toFixed(1) }}
     </h3>
   </div>
 </template>
