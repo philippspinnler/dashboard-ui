@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="day in days" :key="day.day">
+    <div v-for="day in filteredDays" :key="day.day">
       <div class="date-container">
         <div class="day">
           <h1 class="title">{{ day.day }}</h1>
@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useApi } from '../../composables/useApi'
 import { usePolling } from '../../composables/usePolling'
 
@@ -48,6 +48,55 @@ const fetchCalendar = async () => {
 }
 
 usePolling(fetchCalendar, 900000)
+
+const filteredDays = computed(() => {
+  const MAX_SCORE = 11
+  const SCORE_DAY = 0.8
+  const SCORE_BIRTHDAY = 0.8
+  const SCORE_EVENT = 1.0
+  
+  let totalScore = 0
+  const result = []
+  
+  for (const day of days.value) {
+    // Check if we can add the day header
+    if (totalScore + SCORE_DAY > MAX_SCORE) {
+      break
+    }
+    
+    totalScore += SCORE_DAY
+    const dayData = {
+      day: day.day,
+      date: day.date,
+      events: []
+    }
+    
+    // Add events for this day
+    for (const event of day.events) {
+      const eventScore = event.birthday ? SCORE_BIRTHDAY : SCORE_EVENT
+      
+      if (totalScore + eventScore > MAX_SCORE) {
+        // Can't add this event - check if we should remove the day
+        if (dayData.events.length === 0) {
+          // Day header was added but no events fit - remove the day
+          totalScore -= SCORE_DAY
+        } else {
+          // Some events were added, keep the day
+          result.push(dayData)
+        }
+        return result
+      }
+      
+      totalScore += eventScore
+      dayData.events.push(event)
+    }
+    
+    // All events for this day were added
+    result.push(dayData)
+  }
+  
+  return result
+})
 </script>
 
 <style scoped>
