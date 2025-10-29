@@ -72,6 +72,7 @@ usePolling(fetchCalendar, 900000)
 .event {
   background-color: rgb(255, 255, 255, 0.2);
   padding: 1.1rem;
+  border-radius: 0.66rem;
 }
 
 .event-birthday {
@@ -80,6 +81,7 @@ usePolling(fetchCalendar, 900000)
   justify-content: space-between;
   padding: 1.1rem;
   align-items: center;
+  border-radius: 0.66rem;
 }
 
 .event-all-day {
@@ -89,7 +91,7 @@ usePolling(fetchCalendar, 900000)
 .event-all-day span {
   background-color: rgb(255, 255, 255, 0.7);
   padding: 0.22rem;
-  border-radius: 0.22rem;
+  border-radius: 0.33rem;
   color: rgb(50, 50, 50);
 }
 </style>

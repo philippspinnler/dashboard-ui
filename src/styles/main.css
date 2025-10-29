@@ -23,7 +23,7 @@ body {
 }
 
 .container {
-  padding: 1.1rem;
+  /* padding: 1.1rem; */
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -71,18 +71,53 @@ body {
 }
 
 .widget {
+  margin: 0.8rem;
   padding: 1.1rem;
   overflow: hidden;
+  
+  /* Glassmorphism effect */
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  
+  /* Rounded corners */
+  border-radius: 1.1rem;
+  
+  /* Box shadow for depth */
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Adjust margins for left and right container widgets to maintain consistent spacing */
+.container-content-left .widget {
+  margin: 0.8rem 0.4rem 0.8rem 0.8rem; /* top, right, bottom, left */
+}
+
+.container-content-right .widget {
+  margin: 0.8rem 0.8rem 0.8rem 0.4rem; /* top, right, bottom, left */
 }
 
 .widget .title {
   text-transform: uppercase;
   color: rgb(255, 255, 255, 0.4);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .widget .subtitle {
   text-transform: uppercase;
   color: rgb(255, 255, 255, 0.7);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Text shadow for better readability */
+h1, h2, h3 {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+p, span, div {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 /* Sonos widget layout adjustments */
