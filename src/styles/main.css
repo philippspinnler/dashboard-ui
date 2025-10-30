@@ -77,9 +77,9 @@ body {
   
   /* Glassmorphism effect */
   background-color: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   
   /* Rounded corners */
   border-radius: 1.1rem;
