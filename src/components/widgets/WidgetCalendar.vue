@@ -118,6 +118,10 @@ const filteredDays = computed(() => {
   margin-bottom: 2.2rem;
 }
 
+div:last-child .event-container:last-child {
+  margin-bottom: 0;
+}
+
 .event {
   background-color: rgb(255, 255, 255, 0.2);
   padding: 1.1rem;
