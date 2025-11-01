@@ -118,7 +118,7 @@ const filteredDays = computed(() => {
   margin-bottom: 2.2rem;
 }
 
-div:last-child .event-container:last-child {
+div:last-child > .event-container:last-child {
   margin-bottom: 0;
 }
 
