@@ -7,7 +7,7 @@
             v-for="widgetId in leftWidgets" 
             :key="widgetId" 
             class="widget" 
-            :class="`widget-${widgetId}`"
+            :class="[`widget-${widgetId}`, { 'widget-glassmorphism': enableGlassmorphism }]"
           >
             <component :is="widgetComponents[widgetId]" v-if="widgetComponents[widgetId]" />
           </div>
@@ -17,7 +17,7 @@
             v-for="widgetId in rightWidgets" 
             :key="widgetId" 
             class="widget" 
-            :class="`widget-${widgetId}`"
+            :class="[`widget-${widgetId}`, { 'widget-glassmorphism': enableGlassmorphism }]"
           >
             <component :is="widgetComponents[widgetId]" v-if="widgetComponents[widgetId]" />
           </div>
@@ -28,7 +28,7 @@
           v-for="widgetId in bottomWidgets" 
           :key="widgetId" 
           class="widget" 
-          :class="`widget-${widgetId}`"
+          :class="[`widget-${widgetId}`, { 'widget-glassmorphism': enableGlassmorphism }]"
         >
           <component :is="widgetComponents[widgetId]" v-if="widgetComponents[widgetId]" />
         </div>
@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useApi } from './composables/useApi'
 import { useWidgetConfig } from './composables/useWidgetConfig'
 import WidgetClock from './components/widgets/WidgetClock.vue'
@@ -54,6 +54,11 @@ import WidgetCars from './components/widgets/WidgetCars.vue'
 
 const { get } = useApi()
 const { leftWidgets, rightWidgets, bottomWidgets } = useWidgetConfig()
+
+// Glassmorphism configuration
+const enableGlassmorphism = computed(() => {
+  return import.meta.env.VITE_ENABLE_GLASSMORPHISM === 'true'
+})
 
 // Component mapping
 const widgetComponents = {
