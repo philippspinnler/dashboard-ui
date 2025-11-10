@@ -20,11 +20,15 @@ export function useWidgetConfig() {
   }
 
   // Get widget configurations from environment variables
+  const topLeftWidgets = parseWidgets(getEnvValue('VITE_WIDGETS_TOP_LEFT'))
+  const topRightWidgets = parseWidgets(getEnvValue('VITE_WIDGETS_TOP_RIGHT'))
   const leftWidgets = parseWidgets(getEnvValue('VITE_WIDGETS_LEFT'))
   const rightWidgets = parseWidgets(getEnvValue('VITE_WIDGETS_RIGHT'))
   const bottomWidgets = parseWidgets(getEnvValue('VITE_WIDGETS_BOTTOM'))
 
   return {
+    topLeftWidgets,
+    topRightWidgets,
     leftWidgets,
     rightWidgets,
     bottomWidgets

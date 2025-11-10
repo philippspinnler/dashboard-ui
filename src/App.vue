@@ -1,6 +1,28 @@
 <template>
   <div id="app" :style="{ backgroundImage: `url(${image})` }">
     <div class="container" :style="{ backgroundColor: backgroundColor }">
+      <div class="container-top">
+        <div class="container-top-left">
+          <div 
+            v-for="widgetId in topLeftWidgets" 
+            :key="widgetId" 
+            class="widget" 
+            :class="[`widget-${widgetId}`, { 'widget-glassmorphism': enableGlassmorphism }]"
+          >
+            <component :is="widgetComponents[widgetId]" v-if="widgetComponents[widgetId]" />
+          </div>
+        </div>
+        <div class="container-top-right">
+          <div 
+            v-for="widgetId in topRightWidgets" 
+            :key="widgetId" 
+            class="widget" 
+            :class="[`widget-${widgetId}`, { 'widget-glassmorphism': enableGlassmorphism }]"
+          >
+            <component :is="widgetComponents[widgetId]" v-if="widgetComponents[widgetId]" />
+          </div>
+        </div>
+      </div>
       <div class="container-content">
         <div class="container-content-left">
           <div 
@@ -53,7 +75,7 @@ import WidgetWeather from './components/widgets/WidgetWeather.vue'
 import WidgetCars from './components/widgets/WidgetCars.vue'
 
 const { get } = useApi()
-const { leftWidgets, rightWidgets, bottomWidgets } = useWidgetConfig()
+const { topLeftWidgets, topRightWidgets, leftWidgets, rightWidgets, bottomWidgets } = useWidgetConfig()
 
 // Glassmorphism configuration
 const enableGlassmorphism = computed(() => {
