@@ -20,7 +20,7 @@
         <div 
           class="event" 
           v-if="!event.special_event" 
-          :style="{ borderLeft: `solid ${event.color} 0.22rem` }"
+          :style="{ borderLeft: `solid #${event.color} 0.22rem` }"
         >
           <div v-if="event.all_day" class="event-all-day">
             <span>Den ganzen Tag</span>

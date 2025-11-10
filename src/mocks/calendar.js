@@ -9,7 +9,7 @@ export default [
         start_time: '09:00',
         all_day: false,
         name: 'Work Calendar',
-        color: '#3788d8'
+        color: '3788d8'
       },
       {
         summary: 'Dentist Appointment',
@@ -17,7 +17,7 @@ export default [
         start_time: '14:30',
         all_day: false,
         name: 'Personal Calendar',
-        color: '#e67c73'
+        color: 'e67c73'
       },
       {
         summary: 'Geburtstag Max Mustermann',
@@ -25,7 +25,7 @@ export default [
         start_time: '00:00',
         all_day: true,
         name: 'Personal Calendar',
-        color: '#4285F4',
+        color: '4285F4',
         special_event: {
           type: 'birthday',
           name: 'Max Mustermann',
@@ -44,7 +44,7 @@ export default [
         start_time: '00:00',
         all_day: true,
         name: 'Holidays',
-        color: '#33b679'
+        color: '33b679'
       },
       {
         summary: 'Project Review',
@@ -52,7 +52,7 @@ export default [
         start_time: '10:00',
         all_day: false,
         name: 'Work Calendar',
-        color: '#3788d8'
+        color: '3788d8'
       },
       {
         summary: 'Hochzeitstag Schmidt',
@@ -60,7 +60,7 @@ export default [
         start_time: '00:00',
         all_day: true,
         name: 'Personal Calendar',
-        color: '#E67C73',
+        color: 'E67C73',
         special_event: {
           type: 'anniversary',
           name: 'Schmidt',
@@ -79,7 +79,7 @@ export default [
         start_time: '08:30',
         all_day: false,
         name: 'Personal Calendar',
-        color: '#f4511e'
+        color: 'f4511e'
       },
       {
         summary: 'Dinner with Friends',
@@ -87,7 +87,7 @@ export default [
         start_time: '18:00',
         all_day: false,
         name: 'Personal Calendar',
-        color: '#8e24aa'
+        color: '8e24aa'
       }
     ]
   },
@@ -101,7 +101,7 @@ export default [
         start_time: '13:00',
         all_day: false,
         name: 'Work Calendar',
-        color: '#3788d8'
+        color: '3788d8'
       }
     ]
   },
@@ -115,7 +115,7 @@ export default [
         start_time: '00:00',
         all_day: true,
         name: 'Personal Calendar',
-        color: '#f4511e'
+        color: 'f4511e'
       },
       {
         summary: 'Geburtstag Sarah Schmidt',
@@ -123,7 +123,7 @@ export default [
         start_time: '00:00',
         all_day: true,
         name: 'Personal Calendar',
-        color: '#4285F4',
+        color: '4285F4',
         special_event: {
           type: 'birthday',
           name: 'Sarah Schmidt',
