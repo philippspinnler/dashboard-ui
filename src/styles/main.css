@@ -138,11 +138,12 @@ p, span, div {
 }
 
 /* Presence widget layout adjustments */
-.container-content-right .presence-person {
-  justify-content: flex-end;
+.container-top-left .presence-container,
+.container-content-left .presence-container {
+  justify-content: flex-start;
 }
 
-.container-content-left .presence-person {
+.container-top-right .presence-container,
+.container-content-right .presence-container {
   justify-content: flex-end;
-  flex-direction: row-reverse;
 }

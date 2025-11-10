@@ -1,17 +1,13 @@
 <template>
-  <div>
-    <h1 class="title">Anwesend</h1>
-    <div v-if="persons" class="presence-container">
-      <div v-for="person in persons" :key="person.name" class="presence-person">
-        <h2 :class="{ muted: person.state === 'not_home' }">{{ person.name }}</h2>
-        <img
-          v-if="person.avatar_url"
-          :src="person.avatar_url"
-          class="presence-avatar"
-          :class="{ muted: person.state === 'not_home' }"
-          :alt="person.name"
-        />
-      </div>
+  <div class="presence-container" v-if="persons">
+    <div v-for="person in persons" :key="person.name" class="presence-person">
+      <img
+        v-if="person.avatar_url"
+        :src="person.avatar_url"
+        class="presence-avatar"
+        :class="{ muted: person.state === 'not_home' }"
+        :alt="person.name"
+      />
     </div>
   </div>
 </template>
@@ -35,29 +31,23 @@ usePolling(fetchPresence, 120000)
 </script>
 
 <style scoped>
-.presence-person {
+.presence-container {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
   gap: 1.1rem;
-  margin-bottom: 0.53rem;
 }
 
-.presence-person h2 {
-  margin: 0;
+.presence-person {
+  display: flex;
 }
 
 .presence-avatar {
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.7rem;
+  height: 2.7rem;
   border-radius: 50%;
   object-fit: cover;
   display: block;
-}
-
-.presence-person:last-child {
-  margin-bottom: 0;
 }
 
 .muted {
