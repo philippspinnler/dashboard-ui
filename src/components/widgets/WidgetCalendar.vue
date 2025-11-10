@@ -7,19 +7,20 @@
         </div>
         <div class="date subtitle">{{ day.date }}</div>
       </div>
-      <div class="event-container" v-for="event in day.events" :key="event.summary || event.birthday?.name">
-        <div class="event-birthday" v-if="event.birthday">
+      <div class="event-container" v-for="event in day.events" :key="event.summary">
+        <div class="event-special" v-if="event.special_event">
           <div>
             <h2>
-              <font-awesome-icon icon="gift" /> {{ event.birthday.name }}
+              <font-awesome-icon :icon="event.special_event.type === 'birthday' ? 'gift' : 'children'" /> 
+              {{ event.special_event.name }}
             </h2>
           </div>
-          <div>{{ event.birthday.age }}</div>
+          <div>{{ event.special_event.years }}</div>
         </div>
         <div 
           class="event" 
-          v-if="!event.birthday" 
-          :style="{ borderLeft: `solid #${event.color} 0.22rem` }"
+          v-if="!event.special_event" 
+          :style="{ borderLeft: `solid ${event.color} 0.22rem` }"
         >
           <div v-if="event.all_day" class="event-all-day">
             <span>Den ganzen Tag</span>
@@ -52,7 +53,7 @@ usePolling(fetchCalendar, 900000)
 const filteredDays = computed(() => {
   const MAX_SCORE = 11
   const SCORE_DAY = 0.8
-  const SCORE_BIRTHDAY = 0.8
+  const SCORE_SPECIAL_EVENT = 0.8
   const SCORE_EVENT = 1.0
   
   let totalScore = 0
@@ -73,7 +74,7 @@ const filteredDays = computed(() => {
     
     // Add events for this day
     for (const event of day.events) {
-      const eventScore = event.birthday ? SCORE_BIRTHDAY : SCORE_EVENT
+      const eventScore = event.special_event ? SCORE_SPECIAL_EVENT : SCORE_EVENT
       
       if (totalScore + eventScore > MAX_SCORE) {
         // Can't add this event - check if we should remove the day
@@ -128,7 +129,7 @@ div:last-child > .event-container:last-child {
   border-radius: 0.66rem;
 }
 
-.event-birthday {
+.event-special {
   background-color: rgb(255, 255, 255, 0.2);
   display: flex;
   justify-content: space-between;

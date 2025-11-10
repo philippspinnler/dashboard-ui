@@ -1,72 +1,107 @@
 export default [
   {
-    day: 'Mo',
+    day: 'Montag',
     date: '27. Oktober',
     events: [
       {
-        start_time: '09:00',
         summary: 'Team Meeting',
-        color: '3788d8',
-        all_day: false
+        start_date: '2025-10-27T09:00:00+01:00',
+        start_time: '09:00',
+        all_day: false,
+        name: 'Work Calendar',
+        color: '#3788d8'
       },
       {
-        start_time: '14:30',
         summary: 'Dentist Appointment',
-        color: 'e67c73',
-        all_day: false
+        start_date: '2025-10-27T14:30:00+01:00',
+        start_time: '14:30',
+        all_day: false,
+        name: 'Personal Calendar',
+        color: '#e67c73'
       },
       {
-        birthday: {
+        summary: 'Geburtstag Max Mustermann',
+        start_date: '2025-10-27T00:00:00+01:00',
+        start_time: '00:00',
+        all_day: true,
+        name: 'Personal Calendar',
+        color: '#4285F4',
+        special_event: {
+          type: 'birthday',
           name: 'Max Mustermann',
-          age: 35
+          years: 35
         }
       }
     ]
   },
   {
-    day: 'Di',
+    day: 'Dienstag',
     date: '28. Oktober',
     events: [
       {
         summary: 'National Holiday',
-        color: '33b679',
-        all_day: true
+        start_date: '2025-10-28T00:00:00+01:00',
+        start_time: '00:00',
+        all_day: true,
+        name: 'Holidays',
+        color: '#33b679'
       },
       {
-        start_time: '10:00',
         summary: 'Project Review',
-        color: '3788d8',
-        all_day: false
+        start_date: '2025-10-28T10:00:00+01:00',
+        start_time: '10:00',
+        all_day: false,
+        name: 'Work Calendar',
+        color: '#3788d8'
+      },
+      {
+        summary: 'Hochzeitstag Schmidt',
+        start_date: '2025-10-28T00:00:00+01:00',
+        start_time: '00:00',
+        all_day: true,
+        name: 'Personal Calendar',
+        color: '#E67C73',
+        special_event: {
+          type: 'anniversary',
+          name: 'Schmidt',
+          years: 10
+        }
       }
     ]
   },
   {
-    day: 'Mi',
+    day: 'Mittwoch',
     date: '29. Oktober',
     events: [
       {
-        start_time: '08:30',
         summary: 'Yoga Class',
-        color: 'f4511e',
-        all_day: false
+        start_date: '2025-10-29T08:30:00+01:00',
+        start_time: '08:30',
+        all_day: false,
+        name: 'Personal Calendar',
+        color: '#f4511e'
       },
       {
-        start_time: '18:00',
         summary: 'Dinner with Friends',
-        color: '8e24aa',
-        all_day: false
+        start_date: '2025-10-29T18:00:00+01:00',
+        start_time: '18:00',
+        all_day: false,
+        name: 'Personal Calendar',
+        color: '#8e24aa'
       }
     ]
   },
   {
-    day: 'Do',
+    day: 'Donnerstag',
     date: '30. Oktober',
     events: [
       {
-        start_time: '13:00',
         summary: 'Client Call',
-        color: '3788d8',
-        all_day: false
+        start_date: '2025-10-30T13:00:00+01:00',
+        start_time: '13:00',
+        all_day: false,
+        name: 'Work Calendar',
+        color: '#3788d8'
       }
     ]
   },
@@ -76,13 +111,23 @@ export default [
     events: [
       {
         summary: 'Halloween Party',
-        color: 'f4511e',
-        all_day: true
+        start_date: '2025-10-31T00:00:00+01:00',
+        start_time: '00:00',
+        all_day: true,
+        name: 'Personal Calendar',
+        color: '#f4511e'
       },
       {
-        birthday: {
+        summary: 'Geburtstag Sarah Schmidt',
+        start_date: '2025-10-31T00:00:00+01:00',
+        start_time: '00:00',
+        all_day: true,
+        name: 'Personal Calendar',
+        color: '#4285F4',
+        special_event: {
+          type: 'birthday',
           name: 'Sarah Schmidt',
-          age: 28
+          years: 28
         }
       }
     ]

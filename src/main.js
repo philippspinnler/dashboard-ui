@@ -6,6 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {
   faGift,
+  faChildren,
   faChevronDown,
   faChevronUp,
   faStar,
@@ -31,6 +32,7 @@ import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons'
 // Add icons to the library
 library.add(
   faGift,
+  faChildren,
   faChevronDown,
   faChevronUp,
   faStar,
