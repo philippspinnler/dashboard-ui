@@ -79,6 +79,13 @@ const { topLeftWidgets, topRightWidgets, leftWidgets, rightWidgets, bottomWidget
 
 // Glassmorphism configuration
 const enableGlassmorphism = computed(() => {
+  // Try runtime config first (window.ENV from config.js)
+  if (window.ENV && window.ENV.VITE_ENABLE_GLASSMORPHISM && 
+      !window.ENV.VITE_ENABLE_GLASSMORPHISM.startsWith('__') && 
+      !window.ENV.VITE_ENABLE_GLASSMORPHISM.startsWith('${')) {
+    return window.ENV.VITE_ENABLE_GLASSMORPHISM === 'true'
+  }
+  // Fall back to build-time config (import.meta.env from .env)
   return import.meta.env.VITE_ENABLE_GLASSMORPHISM === 'true'
 })
 
