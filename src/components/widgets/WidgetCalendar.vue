@@ -141,6 +141,12 @@ div:last-child > .event-container:last-child {
   border-radius: 0.66rem;
 }
 
+.event-special h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.44rem;
+}
+
 .event-all-day {
   margin-bottom: 0.44rem;
 }
