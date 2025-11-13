@@ -11,19 +11,16 @@
     "format": "prettier --write \"src/**/*.{js,vue,json,css}\""
   },
   "dependencies": {
-    "vue": "^3.5.22",
     "axios": "^1.7.9",
     "dayjs": "^1.11.13",
-    "@fortawesome/fontawesome-svg-core": "^6.7.2",
-    "@fortawesome/free-solid-svg-icons": "^6.7.2",
-    "@fortawesome/free-regular-svg-icons": "^6.7.2",
-    "@fortawesome/vue-fontawesome": "^3.0.8"
+    "iconoir-vue": "^7.9.0",
+    "vue": "^3.5.22"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
-    "vite": "^7.1.7",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.28.0",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "vite": "^7.1.7"
   }
 }

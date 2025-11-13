@@ -11,7 +11,8 @@
         <div class="event-special" v-if="event.special_event">
           <div>
             <h2>
-              <font-awesome-icon :icon="event.special_event.type === 'birthday' ? 'gift' : 'children'" /> 
+              <Gift v-if="event.special_event.type === 'birthday'" /> 
+              <Heart v-else />
               {{ event.special_event.name }}
             </h2>
           </div>
@@ -37,6 +38,8 @@
 import { ref, computed } from 'vue'
 import { useApi } from '../../composables/useApi'
 import { usePolling } from '../../composables/usePolling'
+import Gift from 'iconoir-vue/regular/Gift'
+import Heart from 'iconoir-vue/regular/Heart'
 
 const { get } = useApi()
 const days = ref([])

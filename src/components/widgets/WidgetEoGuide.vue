@@ -12,12 +12,13 @@
     </div>
     <p class="subtitle">Bewertung</p>
     <h3>
-      <font-awesome-icon
+      <component
         v-for="(star, index) in starsArray"
         :key="index"
-        :icon="star.icon"
+        :is="star.component"
         :class="star.class"
-      /> {{ overall_rating.toFixed(1) }}
+      />
+      {{ overall_rating.toFixed(1) }}
     </h3>
   </div>
 </template>
@@ -26,6 +27,9 @@
 import { ref, computed } from 'vue'
 import { useApi } from '../../composables/useApi'
 import { usePolling } from '../../composables/usePolling'
+import Star from 'iconoir-vue/regular/Star'
+import StarSolid from 'iconoir-vue/solid/Star'
+import StarHalfDashed from 'iconoir-vue/regular/StarHalfDashed'
 
 const { get } = useApi()
 const downloads_last_24h = ref('')
@@ -61,18 +65,18 @@ const starsArray = computed(() => {
   // Full stars
   const fullStars = Math.floor(roundedRating)
   for (let i = 0; i < fullStars; i++) {
-    stars.push({ icon: ['fas', 'star'], class: 'filled' })
+    stars.push({ component: StarSolid, class: 'filled' })
   }
   
   // Half star
   if (roundedRating % 1 !== 0) {
-    stars.push({ icon: ['fas', 'star-half-stroke'], class: 'filled' })
+    stars.push({ component: StarHalfDashed, class: 'filled' })
   }
   
   // Empty stars
   const emptyStars = 5 - Math.ceil(roundedRating)
   for (let i = 0; i < emptyStars; i++) {
-    stars.push({ icon: ['far', 'star'], class: 'outline' })
+    stars.push({ component: Star, class: 'outline' })
   }
   
   return stars

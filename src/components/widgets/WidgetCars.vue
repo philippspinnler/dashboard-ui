@@ -5,12 +5,12 @@
     <div v-for="car in cars" :key="car.name">
       <p class="subtitle">{{ car.name }}</p>
       <h3>
-        <font-awesome-icon :icon="getBatteryIcon(car.charge_procentage)" /> {{ car.charge_procentage }} %
-        <font-awesome-icon icon="charging-station" /> {{ car.range }} km
+        <component :is="getBatteryIcon(car.charge_procentage)" /> {{ car.charge_procentage }} %
+        <EvPlugCharging /> {{ car.range }} km
       </h3>
       <h3 v-if="car.charging">
-        <font-awesome-icon icon="clock" /> geladen {{ endOfChargeTime(car.end_of_charge) }}
-        <font-awesome-icon icon="bolt" /> {{car.charging_power}} kw
+        <Clock /> geladen {{ endOfChargeTime(car.end_of_charge) }}
+        <Flash /> {{car.charging_power}} kw
       </h3>
     </div>
   </div>
@@ -21,6 +21,14 @@ import { ref } from 'vue'
 import { useApi } from '../../composables/useApi'
 import { usePolling } from '../../composables/usePolling'
 import dayjs from '../../utils/datetime'
+import BatteryEmpty from 'iconoir-vue/regular/BatteryEmpty'
+import BatteryWarning from 'iconoir-vue/regular/BatteryWarning'
+import Battery50 from 'iconoir-vue/regular/Battery50'
+import Battery75 from 'iconoir-vue/regular/Battery75'
+import BatteryFull from 'iconoir-vue/regular/BatteryFull'
+import EvPlugCharging from 'iconoir-vue/regular/EvPlugCharging'
+import Clock from 'iconoir-vue/regular/Clock'
+import Flash from 'iconoir-vue/regular/Flash'
 
 const { get } = useApi()
 const cars = ref([])
@@ -37,11 +45,11 @@ const endOfChargeTime = (endTime) => {
 }
 
 const getBatteryIcon = (percentage) => {
-  if (percentage <= 20) return 'battery-empty'
-  if (percentage <= 40) return 'battery-quarter'
-  if (percentage <= 60) return 'battery-half'
-  if (percentage <= 80) return 'battery-three-quarters'
-  return 'battery-full'
+  if (percentage <= 20) return BatteryEmpty
+  if (percentage <= 40) return BatteryWarning
+  if (percentage <= 60) return Battery50
+  if (percentage <= 80) return Battery75
+  return BatteryFull
 }
 
 usePolling(fetchCars, 300000) // Poll every 5 minutes

@@ -4,8 +4,8 @@
     <div v-for="speedtest in speedtests" :key="speedtest.provider">
       <p class="subtitle">{{ speedtest.provider }}</p>
       <h2>
-        {{ speedtest.download }} <font-awesome-icon icon="chevron-down" />
-        {{ speedtest.upload }} <font-awesome-icon icon="chevron-up" />
+        {{ speedtest.download }} <Download />
+        {{ speedtest.upload }} <Upload />
       </h2>
     </div>
   </div>
@@ -15,6 +15,8 @@
 import { ref } from 'vue'
 import { useApi } from '../../composables/useApi'
 import { usePolling } from '../../composables/usePolling'
+import Download from 'iconoir-vue/regular/Download'
+import Upload from 'iconoir-vue/regular/Upload'
 
 const { get } = useApi()
 const speedtests = ref([])

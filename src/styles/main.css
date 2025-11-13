@@ -147,3 +147,27 @@ p, span, div {
 .container-content-right .presence-container {
   justify-content: flex-end;
 }
+
+/* Icon styling for iconoir-vue */
+svg {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1em;
+}
+
+/* Specific icon sizes for different heading levels */
+h1 svg {
+  width: 1em;
+  height: 1em;
+}
+
+h2 svg {
+  width: 0.9em;
+  height: 0.9em;
+}
+
+h3 svg {
+  width: 0.85em;
+  height: 0.85em;
+}
