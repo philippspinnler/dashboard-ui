@@ -105,13 +105,59 @@ const widgetComponents = {
 
 const image = ref(null)
 const backgroundColor = ref('rgba(0, 0, 0, 1)')
+const previousImage = ref(null)
 
 const transitionStepSpeed = 50
 
+// Preload image to ensure it loads before displaying
+const preloadImage = (url) => {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => resolve(url)
+    img.onerror = () => reject(new Error(`Failed to load image: ${url}`))
+    img.src = url
+  })
+}
+
 const getImages = async () => {
-  const data = await get('/album')
-  if (data && data.images && data.images.length > 0) {
-    image.value = data.images[Math.floor(Math.random() * data.images.length)]
+  try {
+    const data = await get('/album')
+    if (data && data.images && data.images.length > 0) {
+      // Try each image until one loads successfully
+      const shuffledImages = [...data.images].sort(() => Math.random() - 0.5)
+      
+      for (const imageUrl of shuffledImages) {
+        try {
+          await preloadImage(imageUrl)
+          // Image loaded successfully, use it
+          previousImage.value = image.value
+          image.value = imageUrl
+          console.log('Successfully loaded image:', imageUrl)
+          return true
+        } catch (error) {
+          console.warn('Failed to load image, trying next:', error.message)
+        }
+      }
+      
+      // If all images failed and we have a previous image, keep it
+      if (previousImage.value) {
+        console.warn('All images failed to load, keeping previous image')
+        image.value = previousImage.value
+      } else {
+        console.error('All images failed to load and no previous image available')
+      }
+      return false
+    } else {
+      console.warn('No images in response from /album')
+      return false
+    }
+  } catch (error) {
+    console.error('Error fetching album images:', error)
+    // Keep previous image if available
+    if (previousImage.value) {
+      image.value = previousImage.value
+    }
+    return false
   }
 }
 
@@ -131,13 +177,20 @@ const fadeToTransparent = async () => {
 }
 
 onMounted(async () => {
-  await getImages()
-  await fadeToTransparent()
+  const initialLoad = await getImages()
+  if (initialLoad) {
+    await fadeToTransparent()
+  } else {
+    console.error('Failed to load initial image')
+  }
 
   setInterval(async () => {
     await fadeToBlack()
-    await getImages()
-    await fadeToTransparent()
+    const loaded = await getImages()
+    // Only fade to transparent if image loaded successfully
+    if (loaded || image.value) {
+      await fadeToTransparent()
+    }
   }, 5 * 1000 * 60)
 })
 </script>
