@@ -148,6 +148,18 @@ p, span, div {
   justify-content: flex-end;
 }
 
+/* Inverter widget layout adjustments */
+.container-content-right .energy-flow,
+.container-top-right .energy-flow {
+  justify-content: flex-end;
+}
+
+.container-content-left .energy-flow,
+.container-top-left .energy-flow,
+.container-bottom .energy-flow {
+  justify-content: flex-start;
+}
+
 /* Icon styling for iconoir-vue */
 svg {
   display: inline-block;

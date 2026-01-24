@@ -133,6 +133,8 @@ docker run -p 80:80 dakboard-ui
 - **Public Transportation** - Next departure times
 - **Internet** - Speed test results
 - **EO-Guide** - App statistics
+- **Cars** - Vehicle information
+- **Inverter** - Solar inverter energy flow and battery status
 
 ## Code Quality
 

@@ -8,6 +8,7 @@ import internet from './internet.js'
 import eoGuide from './eoGuide.js'
 import cars from './cars.js'
 import album from './album.js'
+import inverter from './inverter.js'
 
 // Mock data registry - maps API endpoints to mock data
 export const mockData = {
@@ -20,7 +21,8 @@ export const mockData = {
   '/speedtest': internet,
   '/eo-guide': eoGuide,
   '/cars': cars,
-  '/album': album
+  '/album': album,
+  '/inverter': inverter
 }
 
 // Helper function to get mock data for an endpoint

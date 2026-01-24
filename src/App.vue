@@ -73,6 +73,7 @@ import WidgetPublicTransportation from './components/widgets/WidgetPublicTranspo
 import WidgetEoGuide from './components/widgets/WidgetEoGuide.vue'
 import WidgetWeather from './components/widgets/WidgetWeather.vue'
 import WidgetCars from './components/widgets/WidgetCars.vue'
+import WidgetInverter from './components/widgets/WidgetInverter.vue'
 
 const { get } = useApi()
 const { topLeftWidgets, topRightWidgets, leftWidgets, rightWidgets, bottomWidgets } = useWidgetConfig()
@@ -100,7 +101,8 @@ const widgetComponents = {
   'public-transportation': WidgetPublicTransportation,
   'eo-guide': WidgetEoGuide,
   'weather': WidgetWeather,
-  'cars': WidgetCars
+  'cars': WidgetCars,
+  'inverter': WidgetInverter
 }
 
 const image = ref(null)
