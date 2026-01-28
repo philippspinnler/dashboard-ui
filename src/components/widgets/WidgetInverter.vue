@@ -13,12 +13,11 @@
 
       <!-- Flow Container -->
       <div class="flow-container">
-        <!-- Middle Section: Battery and Home -->
         <div class="center-nodes">
           <!-- Battery -->
           <div class="energy-node battery-node">
             <div class="icon-wrapper">
-              <component :is="getBatteryIcon" class="node-icon battery-icon" :class="getBatteryClass()" />
+              <component :is="getBatteryIcon" class="node-icon battery-icon" :class="getBatteryClass" />
             </div>
             <div class="node-value">{{ batterySOCFormatted }}%</div>
           </div>
@@ -38,16 +37,8 @@
         <div class="icon-wrapper">
           <component :is="getGridIcon" class="node-icon" :class="getGridIconClass" />
         </div>
-        <div class="grid-values">
-          <div v-if="gridConsumption > 0" class="node-value consumption">
-            {{ gridConsumptionFormatted }}
-          </div>
-          <div v-else-if="gridFeedin > 0" class="node-value feedin">
-            {{ gridFeedinFormatted }}
-          </div>
-          <div v-else class="node-value neutral">
-            0 W
-          </div>
+        <div class="node-value" :class="getGridValueClass">
+          {{ getGridValue }}
         </div>
       </div>
     </div>
@@ -98,12 +89,12 @@ const getBatteryIcon = computed(() => {
   return BatteryEmpty
 })
 
-const getBatteryClass = () => {
+const getBatteryClass = computed(() => {
   if (batterySOC.value > 80) return 'battery-full'
   if (batterySOC.value > 50) return 'battery-good'
   if (batterySOC.value > 20) return 'battery-medium'
   return 'battery-low'
-}
+})
 
 const getGridIcon = computed(() => {
   if (gridConsumption.value > 0) return EvPlug
@@ -115,6 +106,18 @@ const getGridIconClass = computed(() => {
   if (gridConsumption.value > 0) return 'grid-icon-consumption'
   if (gridFeedin.value > 0) return 'grid-icon-feedin'
   return 'grid-icon'
+})
+
+const getGridValue = computed(() => {
+  if (gridConsumption.value > 0) return gridConsumptionFormatted.value
+  if (gridFeedin.value > 0) return gridFeedinFormatted.value
+  return '0 W'
+})
+
+const getGridValueClass = computed(() => {
+  if (gridConsumption.value > 0) return 'consumption'
+  if (gridFeedin.value > 0) return 'feedin'
+  return 'neutral'
 })
 
 const fetchInverter = async () => {
@@ -151,24 +154,17 @@ usePolling(fetchInverter, 10000)
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  flex: 0 0 auto;
   min-width: 100px;
 }
 
-/* Align all icon wrappers at the same height */
-.energy-node .icon-wrapper {
-  margin-top: 0;
-}
-
 .icon-wrapper {
-  position: relative;
   width: 2.7rem;
   height: 2.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: rgb(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .node-icon {
@@ -223,13 +219,6 @@ usePolling(fetchInverter, 10000)
   filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.6));
 }
 
-.node-label {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.7);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
 .node-value {
   font-size: 1.5rem;
   font-weight: 500;
@@ -252,8 +241,6 @@ usePolling(fetchInverter, 10000)
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  flex: 0 1 auto;
-  justify-content: flex-start;
 }
 
 .center-nodes {
@@ -263,13 +250,6 @@ usePolling(fetchInverter, 10000)
   align-items: flex-start;
 }
 
-.grid-values {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .energy-flow {
     flex-direction: column;
