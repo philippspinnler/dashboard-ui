@@ -1,6 +1,6 @@
 <template>
   <div class="inverter-container">
-    <h1 class="title">Inverter</h1>
+    <h1 class="title">Wechselrichter</h1>
     
     <div class="energy-flow">
       <!-- Solar PV Section -->
@@ -21,10 +21,7 @@
             <div class="icon-wrapper">
               <component :is="getBatteryIcon" class="node-icon battery-icon" :class="getBatteryClass()" />
             </div>
-            <div class="battery-level">
-              <div class="battery-fill" :style="{ width: batterySOC + '%' }"></div>
-            </div>
-            <div class="node-label">Battery</div>
+            <div class="node-label">Batterie</div>
             <div class="node-value">{{ batterySOCFormatted }}%</div>
           </div>
 
@@ -33,7 +30,7 @@
             <div class="icon-wrapper">
               <Home class="node-icon home-icon" />
             </div>
-            <div class="node-label">Home</div>
+            <div class="node-label">Haushalt</div>
             <div class="node-value">{{ powerConsumptionFormatted }}</div>
           </div>
         </div>
@@ -44,13 +41,16 @@
         <div class="icon-wrapper">
           <Cloud class="node-icon grid-icon" />
         </div>
-        <div class="node-label">Grid</div>
+        <div class="node-label">Netz</div>
         <div class="grid-values">
-          <div class="node-value consumption">
+          <div v-if="gridConsumption > 0" class="node-value consumption">
             ↓ {{ gridConsumptionFormatted }}
           </div>
-          <div class="node-value feedin">
+          <div v-else-if="gridFeedin > 0" class="node-value feedin">
             ↑ {{ gridFeedinFormatted }}
+          </div>
+          <div v-else class="node-value neutral">
+            - 0 W
           </div>
         </div>
       </div>
@@ -153,19 +153,18 @@ usePolling(fetchInverter, 10000)
 
 .icon-wrapper {
   position: relative;
-  width: 3rem;
-  height: 3rem;
+  width: 2.7rem;
+  height: 2.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
+  background-color: rgb(255, 255, 255, 0.2);
 }
 
 .node-icon {
-  width: 2rem;
-  height: 2rem;
+  width: 1.7rem;
+  height: 1.7rem;
 }
 
 .pv-icon {
@@ -201,18 +200,19 @@ usePolling(fetchInverter, 10000)
 }
 
 .grid-icon {
-  color: #8b5cf6;
+  color: #14b8a6;
+  filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.6));
 }
 
 .node-label {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .node-value {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 500;
   color: white;
 }
@@ -227,22 +227,6 @@ usePolling(fetchInverter, 10000)
 
 .node-value.neutral {
   color: rgba(255, 255, 255, 0.5);
-}
-
-.battery-level {
-  width: 60px;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-  overflow: hidden;
-  margin: 0.3rem 0;
-}
-
-.battery-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #22c55e, #84cc16);
-  transition: width 0.5s ease;
-  border-radius: 4px;
 }
 
 .flow-container {
