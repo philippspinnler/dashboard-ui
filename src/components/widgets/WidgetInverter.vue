@@ -8,7 +8,6 @@
         <div class="icon-wrapper">
           <SunLight class="node-icon pv-icon" />
         </div>
-        <div class="node-label">Solar</div>
         <div class="node-value">{{ pvPowerFormatted }}</div>
       </div>
 
@@ -21,7 +20,6 @@
             <div class="icon-wrapper">
               <component :is="getBatteryIcon" class="node-icon battery-icon" :class="getBatteryClass()" />
             </div>
-            <div class="node-label">Batterie</div>
             <div class="node-value">{{ batterySOCFormatted }}%</div>
           </div>
 
@@ -30,7 +28,6 @@
             <div class="icon-wrapper">
               <Home class="node-icon home-icon" />
             </div>
-            <div class="node-label">Haushalt</div>
             <div class="node-value">{{ powerConsumptionFormatted }}</div>
           </div>
         </div>
@@ -39,18 +36,17 @@
       <!-- Grid Section -->
       <div class="energy-node grid-node">
         <div class="icon-wrapper">
-          <Cloud class="node-icon grid-icon" />
+          <component :is="getGridIcon" class="node-icon" :class="getGridIconClass" />
         </div>
-        <div class="node-label">Netz</div>
         <div class="grid-values">
           <div v-if="gridConsumption > 0" class="node-value consumption">
-            ↓ {{ gridConsumptionFormatted }}
+            {{ gridConsumptionFormatted }}
           </div>
           <div v-else-if="gridFeedin > 0" class="node-value feedin">
-            ↑ {{ gridFeedinFormatted }}
+            {{ gridFeedinFormatted }}
           </div>
           <div v-else class="node-value neutral">
-            - 0 W
+            0 W
           </div>
         </div>
       </div>
@@ -69,7 +65,8 @@ import Battery50 from 'iconoir-vue/regular/Battery50'
 import Battery75 from 'iconoir-vue/regular/Battery75'
 import BatteryFull from 'iconoir-vue/regular/BatteryFull'
 import Home from 'iconoir-vue/regular/Home'
-import Cloud from 'iconoir-vue/regular/Cloud'
+import EvPlug from 'iconoir-vue/regular/EvPlug'
+import EvPlugCharging from 'iconoir-vue/regular/EvPlugCharging'
 
 const { get } = useApi()
 
@@ -108,6 +105,18 @@ const getBatteryClass = () => {
   return 'battery-low'
 }
 
+const getGridIcon = computed(() => {
+  if (gridConsumption.value > 0) return EvPlug
+  if (gridFeedin.value > 0) return EvPlugCharging
+  return EvPlug
+})
+
+const getGridIconClass = computed(() => {
+  if (gridConsumption.value > 0) return 'grid-icon-consumption'
+  if (gridFeedin.value > 0) return 'grid-icon-feedin'
+  return 'grid-icon'
+})
+
 const fetchInverter = async () => {
   const data = await get('/inverter')
   if (data) {
@@ -133,7 +142,7 @@ usePolling(fetchInverter, 10000)
 .energy-flow {
   display: flex;
   align-items: flex-start;
-  gap: 0.5rem;
+  gap: 1.5rem;
   margin-top: 1rem;
 }
 
@@ -141,7 +150,7 @@ usePolling(fetchInverter, 10000)
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   flex: 0 0 auto;
   min-width: 100px;
 }
@@ -204,6 +213,16 @@ usePolling(fetchInverter, 10000)
   filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.6));
 }
 
+.grid-icon-consumption {
+  color: #dc2626;
+  filter: drop-shadow(0 0 8px rgba(220, 38, 38, 0.7));
+}
+
+.grid-icon-feedin {
+  color: #22c55e;
+  filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.6));
+}
+
 .node-label {
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.7);
@@ -218,7 +237,7 @@ usePolling(fetchInverter, 10000)
 }
 
 .node-value.consumption {
-  color: #ef4444;
+  color: #dc2626;
 }
 
 .node-value.feedin {
@@ -239,7 +258,7 @@ usePolling(fetchInverter, 10000)
 
 .center-nodes {
   display: flex;
-  gap: 0.5rem;
+  gap: 1.5rem;
   justify-content: center;
   align-items: flex-start;
 }
